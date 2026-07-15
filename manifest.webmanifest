@@ -1,0 +1,16 @@
+{
+  "name": "大阪，慢慢逛｜2026 盛夏家庭旅行",
+  "short_name": "大阪慢慢逛",
+  "description": "大阪家庭旅行的行程、購物、交通、文件與清單手帖。",
+  "lang": "zh-Hant",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#F4EFE6",
+  "theme_color": "#F4EFE6",
+  "icons": [
+    {"src":"icons/icon-192.png","sizes":"192x192","type":"image/png","purpose":"any maskable"},
+    {"src":"icons/icon-512.png","sizes":"512x512","type":"image/png","purpose":"any maskable"}
+  ]
+}

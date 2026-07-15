@@ -1,0 +1,737 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#F4EFE6">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="大阪慢慢逛">
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icons/icon-180.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<title>大阪，慢慢逛｜2026 盛夏家庭旅行</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&family=Noto+Serif+TC:wght@600;700;900&family=Zen+Kurenaido&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F4EFE6;
+  --paper-2:#ECE4D7;
+  --card:#FFFDFC;
+  --ink:#2F2A25;
+  --muted:#776F66;
+  --line:#DDD2C4;
+  --coral:#C96F5A;
+  --coral-soft:#F3DDD5;
+  --teal:#52736C;
+  --teal-soft:#DCE9E5;
+  --mustard:#C89A47;
+  --mustard-soft:#F3E7C8;
+  --plum:#765B69;
+  --plum-soft:#E9DFE4;
+  --shadow:0 14px 34px rgba(68,49,31,.08);
+  --serif:"Noto Serif TC",serif;
+  --sans:"Noto Sans TC",system-ui,-apple-system,sans-serif;
+  --hand:"Zen Kurenaido","Noto Serif TC",serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:
+  radial-gradient(circle at 10% -10%,rgba(201,111,90,.13),transparent 36%),
+  radial-gradient(circle at 95% 8%,rgba(82,115,108,.12),transparent 32%),
+  var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.65}
+button,input{font:inherit}
+button{color:inherit}
+a{color:inherit}
+.app{min-height:100vh;padding-bottom:calc(92px + env(safe-area-inset-bottom))}
+.view{display:none;max-width:760px;margin:0 auto;padding:0 18px 32px}
+.view.active{display:block;animation:fade .24s ease}
+@keyframes fade{from{opacity:.2;transform:translateY(4px)}to{opacity:1;transform:none}}
+
+/* top */
+.topline{position:sticky;top:0;z-index:40;margin:0 -18px 18px;padding:calc(12px + env(safe-area-inset-top)) 18px 12px;background:rgba(244,239,230,.9);backdrop-filter:blur(18px);border-bottom:1px solid rgba(221,210,196,.75)}
+.topline-inner{max-width:760px;margin:auto;display:flex;align-items:center;gap:12px}
+.brand{display:flex;align-items:center;gap:10px;min-width:0}
+.brand-mark{width:38px;height:38px;border-radius:13px;background:var(--ink);color:#fff;display:grid;place-items:center;font-family:var(--serif);font-weight:900;box-shadow:0 8px 18px rgba(47,42,37,.16)}
+.brand-copy{min-width:0}
+.brand-copy strong{display:block;font-family:var(--serif);font-size:1.05rem;letter-spacing:.05em;white-space:nowrap}
+.brand-copy span{display:block;color:var(--muted);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase}
+.today-chip{margin-left:auto;border:1px solid var(--line);background:rgba(255,253,252,.78);border-radius:999px;padding:7px 11px;font-size:.78rem;color:var(--muted);white-space:nowrap}
+
+/* hero */
+.hero{position:relative;overflow:hidden;border-radius:30px;padding:30px 24px 25px;background:linear-gradient(145deg,#365B56 0%,#52736C 53%,#729087 100%);color:#FFFDF7;box-shadow:var(--shadow);min-height:330px}
+.hero:before{content:"";position:absolute;width:230px;height:230px;border-radius:50%;background:#E2B960;right:-72px;top:-85px;box-shadow:0 0 0 18px rgba(255,255,255,.06),0 0 0 44px rgba(255,255,255,.035)}
+.hero:after{content:"";position:absolute;left:-12%;right:-12%;height:122px;bottom:-50px;border-radius:50%;background:rgba(23,60,58,.5);transform:rotate(-4deg)}
+.hero>*{position:relative;z-index:2}
+.eyebrow{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;opacity:.78}
+.hero h1{font-family:var(--serif);font-size:clamp(2.25rem,10vw,4.4rem);line-height:1.15;margin:12px 0 4px;letter-spacing:.04em}
+.hero .jp{font-family:var(--hand);font-size:1.2rem;opacity:.88;letter-spacing:.07em}
+.hero-note{margin:28px 0 20px;max-width:440px;font-family:var(--serif);font-size:1.02rem;line-height:1.8}
+.hero-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:18px}
+.hero-stat{padding:12px 10px;border-radius:16px;background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.17);backdrop-filter:blur(6px)}
+.hero-stat span{display:block;font-size:.68rem;opacity:.72;letter-spacing:.08em}
+.hero-stat b{display:block;margin-top:2px;font-size:.98rem}
+
+.section-head{display:flex;align-items:end;justify-content:space-between;margin:30px 2px 13px;gap:12px}
+.section-head h2{font-family:var(--serif);font-size:1.55rem;margin:0;letter-spacing:.04em}
+.section-head p{margin:4px 0 0;color:var(--muted);font-size:.88rem}
+.section-head .script{font-family:var(--hand);font-size:1rem;color:var(--coral);white-space:nowrap}
+
+.card{background:rgba(255,253,252,.9);border:1px solid rgba(221,210,196,.78);border-radius:24px;padding:20px;box-shadow:0 8px 25px rgba(65,49,32,.055);margin-bottom:14px}
+.card.soft-coral{background:linear-gradient(145deg,#FFFDFC,#F8E8E1)}
+.card.soft-teal{background:linear-gradient(145deg,#FFFDFC,#E9F1EE)}
+.card.soft-mustard{background:linear-gradient(145deg,#FFFDFC,#F7EED8)}
+.card-title{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.card-title .icon{width:38px;height:38px;border-radius:13px;display:grid;place-items:center;background:var(--coral-soft);font-size:1.1rem}
+.card-title strong{font-family:var(--serif);font-size:1.12rem}
+.card-title small{display:block;color:var(--muted);font-size:.75rem;font-family:var(--sans);font-weight:500}
+
+.today-route{display:grid;grid-template-columns:78px 1fr;gap:14px;align-items:start}
+.today-date{border-right:1px solid var(--line);padding-right:14px;text-align:center}
+.today-date b{font-family:var(--serif);font-size:2rem;display:block;line-height:1}
+.today-date span{font-size:.75rem;color:var(--muted)}
+.today-main h3{margin:0 0 5px;font-family:var(--serif);font-size:1.25rem}
+.today-main p{margin:0;color:var(--muted);font-size:.92rem}
+.route-pills{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}
+.pill{display:inline-flex;align-items:center;gap:5px;padding:6px 10px;border-radius:999px;background:#F2ECE3;color:#60584F;font-size:.78rem;border:1px solid rgba(221,210,196,.7)}
+.pill.coral{background:var(--coral-soft);border-color:#E8C5BB;color:#8A4B3D}
+.pill.teal{background:var(--teal-soft);border-color:#C8DCD6;color:#3C5E57}
+.pill.mustard{background:var(--mustard-soft);border-color:#E9D8AA;color:#7D5A1F}
+
+.rhythm{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.rhythm div{border-radius:16px;padding:13px 10px;background:#F7F2EA;border:1px solid var(--line);min-height:86px}
+.rhythm b{display:block;font-family:var(--serif);font-size:.92rem}
+.rhythm span{display:block;margin-top:4px;color:var(--muted);font-size:.76rem;line-height:1.45}
+
+.quick-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.quick-card{border:0;text-align:left;padding:18px;border-radius:22px;background:var(--card);box-shadow:0 8px 24px rgba(68,49,31,.06);border:1px solid var(--line);cursor:pointer}
+.quick-card:nth-child(1){background:var(--coral-soft)}
+.quick-card:nth-child(2){background:var(--teal-soft)}
+.quick-card:nth-child(3){background:var(--mustard-soft)}
+.quick-card:nth-child(4){background:var(--plum-soft)}
+.quick-card .qicon{font-size:1.35rem;display:block;margin-bottom:12px}
+.quick-card b{font-family:var(--serif);font-size:1.03rem}
+.quick-card small{display:block;color:var(--muted);margin-top:3px}
+
+/* itinerary */
+.page-intro{padding:10px 2px 20px}
+.page-intro h1{font-family:var(--serif);font-size:2rem;margin:0 0 5px}
+.page-intro p{color:var(--muted);margin:0;max-width:570px}
+.day-card{background:var(--card);border:1px solid var(--line);border-radius:25px;margin-bottom:14px;overflow:hidden;box-shadow:0 8px 22px rgba(68,49,31,.05)}
+.day-card summary{list-style:none;cursor:pointer;padding:18px 18px 17px;display:grid;grid-template-columns:64px 1fr auto;gap:14px;align-items:center}
+.day-card summary::-webkit-details-marker{display:none}
+.day-num{width:58px;height:58px;border-radius:18px;background:var(--teal-soft);display:grid;place-items:center;text-align:center;color:var(--teal)}
+.day-num b{display:block;font-family:var(--serif);font-size:1.25rem;line-height:1.05}
+.day-num small{display:block;font-size:.62rem;letter-spacing:.08em}
+.day-summary h3{margin:0;font-family:var(--serif);font-size:1.2rem}
+.day-summary p{margin:3px 0 0;color:var(--muted);font-size:.84rem}
+.chev{width:32px;height:32px;border-radius:50%;background:#F4EEE6;display:grid;place-items:center;transition:.2s}
+details[open] .chev{transform:rotate(180deg)}
+.day-body{border-top:1px dashed var(--line);padding:8px 18px 20px}
+.day-rhythm{display:flex;gap:7px;flex-wrap:wrap;padding:11px 0 4px}
+.timeline{position:relative;margin-top:8px}
+.timeline:before{content:"";position:absolute;left:48px;top:15px;bottom:18px;border-left:1px dashed #C9BCAE}
+.stop{display:grid;grid-template-columns:42px 18px 1fr;gap:8px;padding:11px 0;position:relative}
+.stop-time{font-size:.78rem;color:var(--muted);font-variant-numeric:tabular-nums;padding-top:3px;text-align:right}
+.stop-dot{width:11px;height:11px;margin:7px 0 0 3px;border-radius:50%;background:var(--coral);box-shadow:0 0 0 5px var(--card);z-index:2}
+.stop-content b{font-size:.98rem}
+.stop-content p{margin:3px 0 0;color:var(--muted);font-size:.83rem}
+.stop-links{display:flex;gap:8px;flex-wrap:wrap;margin-top:7px}
+.mini-link{display:inline-flex;align-items:center;gap:4px;text-decoration:none;font-size:.75rem;color:var(--teal);font-weight:600;padding:4px 8px;border-radius:999px;background:var(--teal-soft)}
+.day-note{margin-top:9px;padding:12px 14px;border-radius:16px;background:#F7F1E8;color:#675E54;font-size:.84rem}
+
+/* shopping */
+.progress-shell{height:11px;border-radius:999px;background:#E9E0D5;overflow:hidden}
+.progress-fill{height:100%;width:0;background:linear-gradient(90deg,var(--coral),#D99B69);border-radius:inherit;transition:.25s}
+.progress-row{display:flex;justify-content:space-between;align-items:end;margin-bottom:8px}
+.progress-row strong{font-family:var(--serif);font-size:1.25rem}
+.progress-row span{font-size:.84rem;color:var(--muted)}
+.group-title{margin:24px 2px 10px;font-family:var(--serif);font-size:1.13rem;display:flex;justify-content:space-between;align-items:center}
+.group-title small{font-family:var(--sans);font-weight:500;color:var(--muted);font-size:.75rem}
+.check-item{display:grid;grid-template-columns:34px 1fr auto;gap:12px;align-items:center;padding:15px 16px;margin-bottom:10px;background:var(--card);border:1px solid var(--line);border-radius:19px}
+.check-box{width:31px;height:31px;border:2px solid #C7BBAE;background:#fff;border-radius:11px;display:grid;place-items:center;cursor:pointer}
+.check-item.done .check-box{background:var(--teal);border-color:var(--teal);color:white}
+.check-item.done .check-copy b{text-decoration:line-through;color:#8F877F}
+.check-copy b{display:block;font-size:.95rem}
+.check-copy span{display:block;color:var(--muted);font-size:.78rem;margin-top:2px}
+.check-map{text-decoration:none;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:#F3EDE5;color:var(--teal)}
+.add-line{display:flex;gap:9px;margin-top:13px}
+.add-line input{min-width:0;flex:1;border:1px solid var(--line);background:var(--card);border-radius:16px;padding:13px 14px;outline:none}
+.add-line input:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(82,115,108,.12)}
+.add-line button,.solid-btn{border:0;background:var(--ink);color:white;border-radius:16px;padding:0 17px;cursor:pointer;font-weight:600}
+
+.budget-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
+.money-field{background:#F7F1E8;border-radius:16px;padding:12px}
+.money-field label{display:block;color:var(--muted);font-size:.7rem;margin-bottom:3px}
+.money-field input{width:100%;border:0;background:transparent;font-size:1.03rem;font-weight:700;color:var(--ink);outline:none}
+.budget-total{display:flex;justify-content:space-between;align-items:center;margin-top:15px;padding-top:14px;border-top:1px dashed var(--line)}
+.budget-total b{font-family:var(--serif);font-size:1.35rem}
+
+/* transport */
+.journey{position:relative;padding-left:28px}
+.journey:before{content:"";position:absolute;left:9px;top:10px;bottom:10px;width:2px;background:linear-gradient(var(--coral),var(--teal))}
+.journey-step{position:relative;padding:0 0 20px 12px}
+.journey-step:before{content:"";position:absolute;left:-25px;top:6px;width:13px;height:13px;border-radius:50%;background:var(--card);border:3px solid var(--coral)}
+.journey-step:last-child{padding-bottom:0}
+.journey-step:last-child:before{border-color:var(--teal)}
+.journey-step time{display:block;color:var(--coral);font-size:.76rem;font-weight:700;letter-spacing:.08em}
+.journey-step b{display:block;font-family:var(--serif);font-size:1.05rem;margin-top:1px}
+.journey-step p{margin:2px 0 0;color:var(--muted);font-size:.83rem}
+.info-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;margin-top:14px}
+.info-cell{background:#F7F1E8;border-radius:15px;padding:11px 12px}
+.info-cell span{display:block;color:var(--muted);font-size:.69rem}
+.info-cell b{display:block;margin-top:2px;font-size:.88rem;word-break:break-word}
+.hotel-address{font-size:.87rem;color:var(--muted);margin:7px 0 0}
+.warning{padding:12px 14px;border-radius:16px;background:#F9E9DF;color:#7C4C3E;font-size:.83rem;margin-top:13px}
+
+/* more */
+.accordion{background:var(--card);border:1px solid var(--line);border-radius:20px;margin-bottom:11px;overflow:hidden}
+.accordion summary{list-style:none;cursor:pointer;padding:16px 17px;display:flex;align-items:center;gap:12px;font-family:var(--serif);font-weight:700}
+.accordion summary::-webkit-details-marker{display:none}
+.accordion summary .aicon{width:34px;height:34px;border-radius:12px;background:var(--mustard-soft);display:grid;place-items:center}
+.accordion summary:after{content:"⌄";margin-left:auto;color:var(--muted)}
+.accordion[open] summary:after{transform:rotate(180deg)}
+.accordion-body{border-top:1px dashed var(--line);padding:15px 17px 18px}
+.cur-row{display:grid;grid-template-columns:1fr auto 1fr;align-items:end;gap:9px}
+.cur-row label{display:block;color:var(--muted);font-size:.7rem;margin-bottom:4px}
+.cur-row input{width:100%;border:1px solid var(--line);border-radius:14px;background:#F8F3EC;padding:12px;text-align:center;font-weight:700;outline:none}
+.rate-line{display:flex;justify-content:space-between;align-items:center;margin-top:12px;color:var(--muted);font-size:.79rem}
+.text-btn{border:0;background:transparent;color:var(--teal);font-weight:700;cursor:pointer;padding:5px}
+.note-list{margin:0;padding-left:20px;color:#5F574F}
+.note-list li{margin-bottom:9px}
+.emergency{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px dashed var(--line)}
+.emergency:last-child{border:0}
+.emergency b{font-variant-numeric:tabular-nums}
+
+/* nav */
+.bottom-nav{position:fixed;z-index:80;left:50%;bottom:0;transform:translateX(-50%);width:min(760px,100%);padding:9px 12px calc(9px + env(safe-area-inset-bottom));background:rgba(255,253,252,.92);backdrop-filter:blur(22px);border-top:1px solid rgba(221,210,196,.85);display:grid;grid-template-columns:repeat(5,1fr);gap:3px}
+.nav-btn{border:0;background:transparent;border-radius:16px;padding:7px 3px 5px;color:#837A71;cursor:pointer;font-size:.68rem}
+.nav-btn span{display:block;font-size:1.25rem;line-height:1.1;margin-bottom:2px;filter:grayscale(.2)}
+.nav-btn.active{background:#F1E8DD;color:var(--ink);font-weight:700}
+
+.toast{position:fixed;left:50%;bottom:108px;transform:translate(-50%,15px);background:var(--ink);color:#fff;border-radius:999px;padding:9px 15px;font-size:.82rem;opacity:0;pointer-events:none;transition:.2s;z-index:100;white-space:nowrap}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+
+@media(min-width:650px){
+  .view{padding-left:28px;padding-right:28px}.topline{margin-left:-28px;margin-right:-28px}.hero{padding:38px 34px}.quick-grid{grid-template-columns:repeat(4,1fr)}
+}
+@media(max-width:390px){
+  .hero-grid{grid-template-columns:1fr 1fr}.hero-stat:nth-child(3){grid-column:1/-1}.rhythm{grid-template-columns:1fr}.budget-grid{grid-template-columns:1fr}.info-grid{grid-template-columns:1fr}.day-card summary{grid-template-columns:58px 1fr auto;gap:10px}
+}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+
+.pwa-install{position:fixed;z-index:95;left:14px;right:14px;bottom:calc(84px + env(safe-area-inset-bottom));max-width:620px;margin:auto;background:rgba(47,42,37,.96);color:#fff;border-radius:20px;padding:14px 15px;box-shadow:0 18px 44px rgba(31,24,18,.25);display:none;align-items:center;gap:12px}
+.pwa-install.show{display:flex}
+.pwa-install .copy{flex:1;min-width:0}
+.pwa-install b{display:block;font-family:var(--serif);font-size:1rem}
+.pwa-install small{display:block;color:#ddd4cb;margin-top:2px;line-height:1.45}
+.pwa-install button{border:0;border-radius:999px;padding:9px 13px;font-weight:700;background:#F4EFE6;color:#2F2A25;white-space:nowrap}
+.pwa-install .dismiss{background:transparent;color:#d7cec5;padding:8px}
+@media(display-mode:standalone){.pwa-install{display:none!important}}
+
+/* Kansai extension planner */
+.extension-wrap{margin-top:34px}
+.extension-lead{margin:0 0 16px;color:var(--muted);font-size:.92rem}
+.plan-card{background:var(--card);border:1px solid rgba(221,210,196,.9);border-radius:22px;padding:18px;margin:0 0 15px;box-shadow:0 8px 24px rgba(68,49,31,.055)}
+.plan-card h3{font-family:var(--serif);font-size:1.2rem;margin:0 0 5px}
+.plan-card>p{color:var(--muted);font-size:.88rem;margin:0 0 14px}
+.plan-route{display:flex;gap:8px;overflow-x:auto;padding:2px 1px 8px;scrollbar-width:none}
+.plan-route::-webkit-scrollbar{display:none}
+.route-node{min-width:154px;border-radius:15px;background:#F7F2EA;padding:12px;border:1px solid #E8DED1}
+.route-node b{display:block;font-size:.91rem;margin-bottom:4px}
+.route-node span{display:block;color:var(--muted);font-size:.75rem;line-height:1.45}
+.route-node .decision{display:inline-flex;width:auto;margin-top:8px;padding:3px 8px;border-radius:999px;font-weight:700;font-size:.68rem}
+.decision.keep{background:var(--teal-soft);color:#365B54}.decision.option{background:var(--mustard-soft);color:#76591E}.decision.drop{background:#EEE8E2;color:#86796D}.decision.must{background:var(--coral-soft);color:#8D493A}
+.plan-note{margin-top:10px;padding:11px 13px;border-radius:13px;background:#FBF7F1;color:#675F57;font-size:.78rem}
+.shop-guide{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-top:12px}
+.shop-guide div{background:#F8F3EC;border:1px solid #E9DFD3;border-radius:13px;padding:11px}
+.shop-guide b{display:block;font-size:.82rem}.shop-guide span{display:block;color:var(--muted);font-size:.72rem;margin-top:3px}
+@media(max-width:390px){.shop-guide{grid-template-columns:1fr}}
+
+</style>
+</head>
+<body>
+<div class="app">
+  <main id="home" class="view active">
+    <div class="topline"><div class="topline-inner">
+      <div class="brand"><div class="brand-mark">旅</div><div class="brand-copy"><strong>大阪，慢慢逛</strong><span>FAMILY SUMMER NOTE</span></div></div>
+      <div class="today-chip" id="dateChip">2026.07</div>
+    </div></div>
+
+    <section class="hero">
+      <div class="eyebrow">OSAKA · NAMBA · UMEDA</div>
+      <h1>把喜歡的，<br>慢慢找回來。</h1>
+      <div class="jp">家族三人、九日間の大阪散歩</div>
+      <p class="hero-note">上午走一點街區，午後躲進百貨，晚上回到有燈、有冷氣、有宵夜的地方。這趟不是趕行程，而是讓全家都還有力氣說「今天很好玩」。</p>
+      <div class="hero-grid">
+        <div class="hero-stat"><span>出發倒數</span><b id="countdown">— 天</b></div>
+        <div class="hero-stat"><span>旅行期間</span><b>7/15–7/23</b></div>
+        <div class="hero-stat"><span>住宿基地</span><b>VESSEL INN</b></div>
+      </div>
+    </section>
+
+    <div class="section-head"><div><h2 id="todayHeading">今天的安排</h2><p>依日期自動顯示最需要注意的事</p></div><div class="script">今日も、ゆっくり。</div></div>
+    <section class="card soft-coral" id="todayCard"></section>
+
+    <div class="section-head"><div><h2>盛夏節奏</h2><p>把最熱的午後留給室內</p></div></div>
+    <section class="card soft-mustard">
+      <div class="rhythm">
+        <div><b>☀️ 上午｜街區</b><span>趁體力好、日照還沒到高峰，走主要街道與戶外店面。</span></div>
+        <div><b>🏬 下午｜室內</b><span>百貨、地下街、模型店。找貨與比價要留 2–3 小時。</span></div>
+        <div><b>🌙 晚上｜回基地</b><span>地下街、商店街、飯店附近用餐，保留小朋友的收尾力氣。</span></div>
+      </div>
+    </section>
+
+    <div class="section-head"><div><h2>快速入口</h2><p>旅行中最常用的四件事</p></div></div>
+    <div class="quick-grid">
+      <button class="quick-card" data-go="itinerary"><span class="qicon">🗓️</span><b>每日行程</b><small>時間軸與地圖</small></button>
+      <button class="quick-card" data-go="shopping"><span class="qicon">🧸</span><b>買物清單</b><small>模型與伴手禮</small></button>
+      <button class="quick-card" data-go="transport"><span class="qicon">✈️</span><b>接送航班</b><small>去回程一次看</small></button>
+      <button class="quick-card" data-go="more"><span class="qicon">🧳</span><b>隨身工具</b><small>匯率、行李、備忘</small></button>
+    </div>
+  </main>
+
+  <main id="itinerary" class="view">
+    <div class="topline"><div class="topline-inner"><div class="brand"><div class="brand-mark">程</div><div class="brand-copy"><strong>九天行程</strong><span>ONE MAIN AREA A DAY</span></div></div><div class="today-chip">一天一主場</div></div></div>
+    <div class="page-intro"><h1>不追景點，追舒服的節奏。</h1><p>抵達日與離境日不硬塞購物；日本橋保留長時間找貨，最後補買集中在 7/22 完成。</p></div>
+    <div id="daysList"></div>
+
+    <section class="extension-wrap">
+      <div class="section-head"><div><h2>關西延伸規劃</h2><p>不硬塞進九天主線，改成可替換的一日／半日模組</p></div><div class="script">寄り道も、丁寧に。</div></div>
+      <p class="extension-lead">神戶以港區形成一條平坦主線；京都則依交通與體力拆成獨立日。點開地圖後，可用其中一個模組替換原本的梅田或彈性日。</p>
+      <div id="sideTripPlans"></div>
+    </section>
+  </main>
+
+  <main id="shopping" class="view">
+    <div class="topline"><div class="topline-inner"><div class="brand"><div class="brand-mark">買</div><div class="brand-copy"><strong>買物手帖</strong><span>MODEL · GIFT · DAILY</span></div></div><div class="today-chip" id="shopCount">0 / 0</div></div></div>
+    <div class="page-intro"><h1>找到喜歡的，不急著第一家就買。</h1><p>模型店先巡價、拍盒況與標價；高價品至少比兩家，伴手禮則集中在最後兩天。</p></div>
+    <section class="card soft-teal">
+      <div class="progress-row"><strong>購物完成率</strong><span id="shopPercent">0%</span></div>
+      <div class="progress-shell"><div class="progress-fill" id="shopProgress"></div></div>
+    </section>
+    <div id="shoppingGroups"></div>
+
+    <div class="section-head"><div><h2>今天花費</h2><p>輸入日圓，會自動儲存在這台裝置</p></div></div>
+    <section class="card">
+      <div class="budget-grid">
+        <div class="money-field"><label>餐飲 JPY</label><input id="foodSpend" inputmode="numeric" value="0"></div>
+        <div class="money-field"><label>交通 JPY</label><input id="travelSpend" inputmode="numeric" value="0"></div>
+        <div class="money-field"><label>購物 JPY</label><input id="shopSpend" inputmode="numeric" value="0"></div>
+      </div>
+      <div class="budget-total"><span>今日合計</span><b id="daySpendTotal">¥0</b></div>
+    </section>
+  </main>
+
+  <main id="transport" class="view">
+    <div class="topline"><div class="topline-inner"><div class="brand"><div class="brand-mark">移</div><div class="brand-copy"><strong>接送與航班</strong><span>DOOR TO DOOR</span></div></div><div class="today-chip">3 人 · 4 件行李</div></div></div>
+    <div class="page-intro"><h1>重要的移動，全部放在同一頁。</h1><p>接送時間、航班、兒童座椅與付款狀態集中整理，避免在聊天記錄裡臨時翻找。</p></div>
+
+    <section class="card soft-coral">
+      <div class="card-title"><div class="icon">🏠</div><div><strong>7/15 台灣出發</strong><small>新竹 → 桃園機場</small></div></div>
+      <div class="journey">
+        <div class="journey-step"><time>13:00</time><b>新竹住家接車</b><p>新竹縣竹北市勝利十一街一帶；現金付款。</p></div>
+        <div class="journey-step"><time>約 14:00–14:30</time><b>抵達桃園機場第一航廈</b><p>保留托運、安檢與小朋友緩衝時間。</p></div>
+        <div class="journey-step"><time>16:25</time><b>IT212 起飛</b><p>TPE → KIX，兩大一小。</p></div>
+      </div>
+      <div class="info-grid">
+        <div class="info-cell"><span>乘客</span><b>3 人</b></div>
+        <div class="info-cell"><span>行李</span><b>28 吋 ×2、背包 ×2</b></div>
+        <div class="info-cell"><span>兒童座椅</span><b>2 歲安全座椅</b></div>
+        <div class="info-cell"><span>聯絡電話</span><b>0909•••166</b></div>
+      </div>
+    </section>
+
+    <section class="card soft-teal">
+      <div class="card-title"><div class="icon" style="background:var(--teal-soft)">🇯🇵</div><div><strong>7/15 日本接機</strong><small>KIX → VESSEL INN NAMBA</small></div></div>
+      <div class="journey">
+        <div class="journey-step"><time>20:15</time><b>IT212 抵達關西機場</b><p>完成入境、領行李後與司機聯絡。</p></div>
+        <div class="journey-step"><time>預估 21:15</time><b>關西機場接車</b><p>3 人、4 件行李、2 歲兒童安全座椅。</p></div>
+        <div class="journey-step"><time>約 22:00</time><b>抵達飯店</b><p>晚餐只安排飯店周邊簡單補給，不再排商場。</p></div>
+      </div>
+      <div class="info-grid">
+        <div class="info-cell"><span>接送總價</span><b>¥26,000</b></div>
+        <div class="info-cell"><span>已付訂金</span><b>¥8,000（NT$1,640）</b></div>
+        <div class="info-cell"><span>現場餘額</span><b>¥18,000</b></div>
+        <div class="info-cell"><span>付款分配</span><b>去程 ¥9,000／回程 ¥9,000</b></div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="card-title"><div class="icon" style="background:var(--mustard-soft)">🏨</div><div><strong>住宿基地</strong><small>7/15 入住 · 7/23 退房</small></div></div>
+      <h3 style="font-family:var(--serif);margin:3px 0 2px">VESSEL INN NAMBA</h3>
+      <p class="hotel-address">2 Chome-2-18 Dotonbori, Chuo Ward, Osaka 542-0071, Japan</p>
+      <div class="stop-links" style="margin-top:12px"><a class="mini-link" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=VESSEL+INN+NAMBA">📍 地圖</a><a class="mini-link" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=VESSEL+INN+NAMBA">🧭 導航</a></div>
+    </section>
+
+    <section class="card soft-mustard">
+      <div class="card-title"><div class="icon" style="background:var(--mustard-soft)">🛫</div><div><strong>7/23 回程</strong><small>VESSEL INN → KIX → TPE</small></div></div>
+      <div class="journey">
+        <div class="journey-step"><time>07:30–07:45 建議</time><b>飯店接車</b><p>實際時間請再與司機確認；11:45 的國際航班不建議 09:00 才從難波出發。</p></div>
+        <div class="journey-step"><time>約 09:00</time><b>抵達關西機場第一航廈</b><p>辦理報到、托運、安檢與早餐。</p></div>
+        <div class="journey-step"><time>11:45</time><b>IT211 起飛</b><p>KIX → TPE，預計 13:45 抵達桃園。</p></div>
+      </div>
+      <div class="warning">7/23 不再安排高島屋或難波補買。需要冷藏、排隊或退稅的品項，統一於 7/22 晚上完成。</div>
+    </section>
+  </main>
+
+  <main id="more" class="view">
+    <div class="topline"><div class="topline-inner"><div class="brand"><div class="brand-mark">備</div><div class="brand-copy"><strong>隨身工具</strong><span>RATE · PACK · NOTES</span></div></div><div class="today-chip">離線也可用</div></div></div>
+    <div class="page-intro"><h1>把瑣碎的小事收好，旅行就會輕一點。</h1><p>清單與金額會保存在瀏覽器中；匯率可連網更新，也可手動輸入。</p></div>
+
+    <details class="accordion" open>
+      <summary><span class="aicon">💱</span>日圓換算</summary>
+      <div class="accordion-body">
+        <div class="cur-row">
+          <div><label>JPY 日圓</label><input id="jpyInput" inputmode="decimal" value="10000"></div>
+          <div style="padding-bottom:11px;color:var(--muted)">≈</div>
+          <div><label>TWD 台幣</label><input id="twdInput" inputmode="decimal"></div>
+        </div>
+        <div class="rate-line"><span id="rateText">100 日圓 ≈ NT$20.50</span><button class="text-btn" id="refreshRate">更新匯率</button></div>
+      </div>
+    </details>
+
+    <details class="accordion" open>
+      <summary><span class="aicon" style="background:var(--teal-soft)">🧳</span>行李檢查</summary>
+      <div class="accordion-body" id="packingList"></div>
+    </details>
+
+    <details class="accordion">
+      <summary><span class="aicon" style="background:var(--coral-soft)">🌡️</span>盛夏提醒</summary>
+      <div class="accordion-body"><ul class="note-list">
+        <li>11:30–16:00 優先安排百貨、地下街與模型店；戶外街區盡量放在上午或傍晚。</li>
+        <li>每人隨身一瓶水，小朋友另外準備電解質飲品、毛巾與替換上衣。</li>
+        <li>模型店真正耗時的是找貨、確認盒況與比價，不要把 4–5 家店硬塞進兩小時。</li>
+        <li>高價商品先拍「店名＋商品＋價格」，離店後再決定，避免重複買或錯過更好盒況。</li>
+        <li>冷氣強，推車或小朋友午睡時準備一件薄外套。</li>
+      </ul></div>
+    </details>
+
+    <details class="accordion">
+      <summary><span class="aicon" style="background:var(--plum-soft)">📄</span>文件與出發前確認</summary>
+      <div class="accordion-body" id="docsList"></div>
+    </details>
+
+    <details class="accordion">
+      <summary><span class="aicon">☎️</span>緊急資訊</summary>
+      <div class="accordion-body">
+        <div class="emergency"><span>日本警察</span><b>110</b></div>
+        <div class="emergency"><span>救護／火災</span><b>119</b></div>
+        <div class="emergency"><span>外交部旅外急難</span><b>+886-800-085-095</b></div>
+        <p style="color:var(--muted);font-size:.78rem;margin:12px 0 0">駐大阪辦事處電話請在出發前從官方來源再次確認，避免使用過期資訊。</p>
+      </div>
+    </details>
+  </main>
+</div>
+
+<div class="pwa-install" id="pwaInstall" role="status" aria-live="polite">
+  <div class="copy"><b>把旅行手帖放到主畫面</b><small id="pwaInstallHint">離線也能開啟行程與清單。</small></div>
+  <button id="pwaInstallBtn" type="button">安裝</button>
+  <button class="dismiss" id="pwaDismiss" type="button" aria-label="關閉">✕</button>
+</div>
+<nav class="bottom-nav" aria-label="主要導覽">
+  <button class="nav-btn active" data-go="home"><span>⌂</span>首頁</button>
+  <button class="nav-btn" data-go="itinerary"><span>▦</span>行程</button>
+  <button class="nav-btn" data-go="shopping"><span>◌</span>買物</button>
+  <button class="nav-btn" data-go="transport"><span>↗</span>交通</button>
+  <button class="nav-btn" data-go="more"><span>＋</span>更多</button>
+</nav>
+<div class="toast" id="toast">已儲存</div>
+
+<script>
+const TRIP_START = new Date('2026-07-15T00:00:00+08:00');
+const TRIP_END = new Date('2026-07-23T23:59:59+09:00');
+const STORE_KEY = 'osaka-slow-trip-2026-v1';
+
+
+const sideTrips = [
+  {title:'神戶港區｜夏季親子核心日',desc:'以室內 átoa 為午後核心，傍晚一路走到 Harborland 夜景。',note:'北野異人館與舊居留地建議二選一；七月炎熱時優先選平坦的舊居留地。',stops:[
+    {name:'神戶舊居留地',why:'平坦、建築街景好串接',decision:'保留',cls:'keep',place:'神戸旧居留地'},
+    {name:'南京町',why:'午餐與小吃最方便',decision:'保留',cls:'keep',place:'南京町 神戸'},
+    {name:'átoa',why:'室內、親子、避暑主場',decision:'建議保留',cls:'must',place:'átoa 神戸'},
+    {name:'神戶港塔',why:'外觀必看，登塔看體力',decision:'外觀必看',cls:'must',place:'神戸ポートタワー'},
+    {name:'Harborland',why:'晚餐、夜景與收尾核心',decision:'必留',cls:'must',place:'神戸ハーバーランド'},
+    {name:'Night Mirage',why:'順路看即可，不等待',decision:'順路',cls:'option',place:'神戸 Night Mirage'}
+  ]},
+  {title:'神戶山手替代線｜北野或生田',desc:'只在天氣與體力都足夠時加入，不與港區主線同時塞滿。',note:'北野坡度與日照負擔較大；生田神社適合作為三宮附近 30–45 分鐘空檔。',stops:[
+    {name:'北野異人館',why:'特色鮮明，但山坡炎熱',decision:'視體力',cls:'option',place:'北野異人館街'},
+    {name:'生田神社',why:'三宮旁，空檔好加入',decision:'空檔加入',cls:'option',place:'生田神社'},
+    {name:'港灣遊船',why:'與港塔、港區景觀重複',decision:'選配',cls:'option',place:'神戸港 クルーズ'},
+    {name:'明石海峽大橋',why:'偏離市中心主線',decision:'刪除',cls:'drop',place:'明石海峡大橋'}
+  ]},
+  {title:'京都文化日｜三十三間堂＋上賀茂',desc:'文化辨識度優先，適合取代一個大阪購物日。',note:'晴明神社規模小且位置不順，只在對陰陽師題材有明確興趣時加入。',stops:[
+    {name:'三十三間堂',why:'文化辨識度高、室內停留',decision:'必留',cls:'must',place:'三十三間堂'},
+    {name:'上賀茂神社',why:'空間品質高、較清幽',decision:'建議保留',cls:'keep',place:'上賀茂神社'},
+    {name:'晴明神社',why:'小型、位置不順',decision:'興趣限定',cls:'option',place:'晴明神社'}
+  ]},
+  {title:'京都獨立模組｜宇治或嵐山',desc:'兩者都值得，但不可再與其他遠區硬併。',note:'宇治／平等院安排半日至一日；嵐山小火車需事前確認班次與座位。貴船／鞍馬則獨立一整日。',stops:[
+    {name:'宇治・平等院',why:'茶文化與世界遺產主題完整',decision:'獨立半日',cls:'must',place:'平等院'},
+    {name:'嵐山小火車',why:'親子體驗佳，需預排',decision:'建議保留',cls:'keep',place:'嵯峨野トロッコ列車'},
+    {name:'貴船・鞍馬',why:'交通與體力成本高',decision:'獨立一日',cls:'option',place:'貴船神社'}
+  ]},
+  {title:'臨空城 Outlet｜航班日模組',desc:'只適合抵達或回程時有充足緩衝，不屬於大阪市區順路景點。',note:'本次回程 11:45 起飛，不適合安排；除非未來改成傍晚航班。',stops:[
+    {name:'臨空城 Outlet',why:'靠近 KIX，但非市區主線',decision:'航班日限定',cls:'option',place:'りんくうプレミアム・アウトレット'}
+  ]}
+];
+
+const days = [
+  {date:'2026-07-15',dow:'三',area:'移動日',title:'從家門到難波',tone:'coral',tags:['移動為主','不排景點','早點休息'],note:'飛機 20:15 才抵達 KIX。原本的 Namba Walk、Namba City、Namba Parks 全部移到 7/16，第一晚只做入住與補給。',stops:[
+    ['13:00','新竹住家接車','3 人、28 吋行李 ×2、背包 ×2、2 歲兒童安全座椅。','新竹縣竹北市勝利十一街'],
+    ['16:25','IT212 桃園起飛','第一航廈；預留小朋友吃飯與上廁所時間。','桃園國際機場第一航廈'],
+    ['20:15','抵達關西機場','完成入境與領行李後聯絡接機司機。','関西国際空港 第1ターミナル'],
+    ['約 22:00','VESSEL INN NAMBA 入住','飯店周邊便利商店或簡單消夜，洗澡後直接休息。','VESSEL INN NAMBA']
+  ]},
+  {date:'2026-07-16',dow:'四',area:'難波',title:'先熟悉基地，再慢慢逛',tone:'mustard',tags:['上午百貨','下午室內','傍晚花園'],note:'第一個完整日不排跨區，先把難波的退稅櫃位、地下街出口與飯店回程路線走熟。',stops:[
+    ['10:00','高島屋大阪店 B1 偵查','先看甜點、伴手禮與排隊品項，不急著買。','大阪高島屋'],
+    ['11:30','Namba City','生活雜貨、服飾與午餐，移動距離短。','なんばCITY'],
+    ['14:00','Namba Parks 細逛','午後留在室內；需要休息時直接找咖啡店。','なんばパークス'],
+    ['16:45','空中花園散步','等陽光轉弱再上戶外區，小朋友可短暫放電。','なんばパークス パークスガーデン'],
+    ['18:30','千日前商店街與道頓堀','晚餐、消夜，走累就直接回飯店。','千日前商店街']
+  ]},
+  {date:'2026-07-17',dow:'五',area:'日本橋',title:'模型與二手店，留一整天找貨',tone:'teal',tags:['模型主場','比價日','2–3 小時以上'],note:'不要把每一家都當打卡點。先看新品與市場價，再進二手店比盒況與價格，真正想買的品項放到下午決定。',stops:[
+    ['10:00','Den Den Town 主街暖身','先走一輪主要店面，建立今天的價格基準。','日本橋でんでんタウン'],
+    ['10:30','Joshin Super Kids Land／Volks','新品、工具與模型材料先看，避免先在二手店買貴。','スーパーキッズランド本店'],
+    ['12:30','日本橋周邊午餐','選有座位、能吹冷氣的定食或商場餐廳。','日本橋 大阪'],
+    ['13:30','Mandarake','二手收藏品與較稀有品，仔細確認盒況。','まんだらけ グランドカオス'],
+    ['15:00','駿河屋','同品項多時適合比價，記得看分店與樓層。','駿河屋 日本橋'],
+    ['16:30','Jungle 空想的機械館','機器人、特攝與機械類主場。','ジャングル 空想的機械館'],
+    ['18:30','千日前拉麵或宵夜','把照片與價格整理一下，再決定隔天是否回補。','千日前商店街']
+  ]},
+  {date:'2026-07-18',dow:'六',area:'心齋橋・堀江',title:'主流商場與設計街區',tone:'plum',tags:['晚點出門','室內為主','傍晚橘子街'],note:'週六人潮會明顯增加。心齋橋只抓重點樓層，不從頭走到尾；Orange Street 放到午後較晚時段。',stops:[
+    ['10:30','心齋橋 PARCO／大丸','選 2–3 個明確樓層，不做全館式硬逛。','心斎橋PARCO'],
+    ['12:30','商場內午餐','避開戶外曝曬，也避免小朋友過早疲勞。','心斎橋'],
+    ['14:00','心齋橋筋重點快逛','只處理清單上的品牌與店，不被人潮帶著走。','心斎橋筋商店街'],
+    ['16:00','Orange Street','潮牌、設計店與路面店；熱度仍高就改成咖啡休息。','オレンジストリート 大阪'],
+    ['18:30','回難波或道頓堀晚餐','依全家體力決定，不追加新區域。','道頓堀']
+  ]},
+  {date:'2026-07-19',dow:'日',area:'梅田',title:'第一輪：建築、選物與夜景',tone:'coral',tags:['週日人潮','不做大量採買','夜景收尾'],note:'週日先把 Grand Front、LUCUA、HEP FIVE 的空間與店型走熟，真正的大量採買留到平日。',stops:[
+    ['10:00','Grand Front Osaka','選物、生活雜貨與咖啡，動線較舒適。','グランフロント大阪'],
+    ['12:30','大阪站周邊午餐','利用商場餐廳，不特地跨街。','大阪駅'],
+    ['14:00','LUCUA／LUCUA 1100','以感興趣的品牌樓層為主。','LUCUA大阪'],
+    ['16:30','Lingo 蘋果派休息','把甜點當休息站，不必特地排長隊。','RINGO ルクア大阪店'],
+    ['18:30','HEP FIVE 摩天輪','看人潮與天氣決定是否搭乘；不上去也不影響行程。','HEP FIVE']
+  ]},
+  {date:'2026-07-20',dow:'一',area:'梅田',title:'海之日：輕鬆室內與玩具城',tone:'mustard',tags:['日本假日','室內','不排重採買'],note:'假日以 Yodobashi 與三番街為主，遇到人潮就提早咖啡休息。今天的任務是看，不是一定要買。',stops:[
+    ['10:00','Yodobashi Camera 梅田','玩具、模型、電器集中看；給小朋友先做第一次篩選。','ヨドバシカメラ マルチメディア梅田'],
+    ['13:00','Links Umeda 午餐','同棟處理，避免中午走到戶外。','LINKS UMEDA'],
+    ['14:30','阪急三番街','模型、角色商品、扭蛋與地下街。','阪急三番街'],
+    ['16:30','咖啡與整理照片','把想買品項整理成「一定買／再比較／放棄」。','梅田 カフェ'],
+    ['18:00','Whity Umeda 地下街','晚餐後直接回難波，不追加夜景。','ホワイティうめだ']
+  ]},
+  {date:'2026-07-21',dow:'二',area:'梅田',title:'百貨主戰日，開始正式採買',tone:'teal',tags:['平日採買','退稅整理','食品偵查'],note:'阪神看食品與伴手禮，阪急看主力品牌，大丸補缺。每完成一間就整理發票，不把退稅單據混在一起。',stops:[
+    ['10:00','阪神百貨食品館','確認保存期限、冷藏條件與最後購買日。','阪神梅田本店'],
+    ['11:30','阪急百貨','今天的主力採買區，預留較長時間。','阪急うめだ本店'],
+    ['14:30','大丸梅田店','補品牌、角色商品或未完成清單。','大丸梅田店'],
+    ['17:00','大阪 Station City','找座位休息，做最後一輪缺口檢查。','大阪ステーションシティ'],
+    ['19:30','回飯店整理戰利品','發票按店別收好，確認行李容量與重量。','VESSEL INN NAMBA']
+  ]},
+  {date:'2026-07-22',dow:'三',area:'KITTE・中崎町',title:'最後補貨，晚上完成打包',tone:'plum',tags:['最後完整日','伴手禮完成','打包日'],note:'所有需要排隊、退稅或冷藏評估的購買都在今天結束。明早直接去機場，不再進市區商場。',stops:[
+    ['10:00','KITTE Osaka','日本各地名產與地方選物，集中處理伴手禮。','KITTE大阪'],
+    ['11:30','3F 模型／興趣店','看清單補缺，不再無目的巡店。','KITTE大阪 3F'],
+    ['13:30','梅田午餐','避開最熱時段後再前往中崎町。','梅田'],
+    ['15:30','中崎町','古著、特色小店與咖啡；體力不足可直接取消。','中崎町'],
+    ['18:30','難波最後補貨','高島屋 B1、Namba City、Namba Walk，只買已列清單。','大阪高島屋'],
+    ['20:30','回飯店完成打包','液體、食品、退稅品與明早隨身物分開。','VESSEL INN NAMBA']
+  ]},
+  {date:'2026-07-23',dow:'四',area:'回程',title:'直接去機場，不再補買',tone:'mustard',tags:['早起','接送確認','機場早餐'],note:'11:45 是國際航班，建議 07:30–07:45 從飯店出發。若接送方仍安排 09:00，應立即重新確認。',stops:[
+    ['06:45','起床與最後檢查','護照、手機、充電線、退稅品、兒童用品。',''],
+    ['07:30–07:45','飯店接車','退房後直接前往 KIX。','VESSEL INN NAMBA'],
+    ['約 09:00','抵達關西機場','報到、托運、安檢與早餐。','関西国際空港 第1ターミナル'],
+    ['11:45','IT211 起飛','預計 13:45 抵達桃園。','桃園國際機場第一航廈']
+  ]}
+];
+
+const defaultShopping = [
+  {group:'模型與收藏',name:'Super Kids Land／Volks 巡價',note:'先建立新品價格基準；記錄型號與含稅價',place:'スーパーキッズランド本店',done:false},
+  {group:'模型與收藏',name:'Mandarake 稀有品與絕版品',note:'確認盒況、缺件、變色與封條',place:'まんだらけ グランドカオス',done:false},
+  {group:'模型與收藏',name:'駿河屋二手比價',note:'同品項至少比較兩家或兩個分店',place:'駿河屋 日本橋',done:false},
+  {group:'模型與收藏',name:'Jungle 機器人／特攝',note:'鎖定主題，不做無目的全店掃貨',place:'ジャングル 空想的機械館',done:false},
+  {group:'模型與收藏',name:'模型工具與耗材',note:'刀具、砂紙、滲線液、遮蓋帶；注意托運限制',place:'スーパーキッズランド本店',done:false},
+  {group:'角色與親子',name:'扭蛋／小型盲盒',note:'先設定總額，避免零散支出失控',place:'阪急三番街',done:false},
+  {group:'角色與親子',name:'小朋友指定角色商品',note:'先拍照比較，最後只選 1–2 件',place:'HEP FIVE',done:false},
+  {group:'大阪伴手禮',name:'551 豚まん',note:'確認保存、加熱與攜帶限制；適合旅行中吃',place:'551蓬莱 難波',done:false},
+  {group:'大阪伴手禮',name:'Rikuro 起司蛋糕',note:'最後一晚購買，確認保存期限',place:'りくろーおじさんの店 なんば本店',done:false},
+  {group:'大阪伴手禮',name:'呼吸巧克力',note:'高島屋、地下街或機場比較包裝與價格',place:'大阪高島屋',done:false},
+  {group:'大阪伴手禮',name:'大阪限定零食／固力果',note:'優先選獨立包裝，方便分送',place:'大阪高島屋',done:false},
+  {group:'神戶採購',name:'神戶布丁',note:'確認保存期限與是否需冷藏',place:'神戸ハーバーランド umie',done:false},
+  {group:'神戶採購',name:'神戶風月堂／瓦煎餅',note:'常溫、易分送，適合正式伴手禮',place:'神戸風月堂 元町本店',done:false},
+  {group:'神戶採購',name:'南京町中華點心',note:'以現吃為主，不大量帶回',place:'南京町 神戸',done:false},
+  {group:'京都採購',name:'宇治抹茶／煎茶',note:'先看產地、品種與賞味期限，不只看包裝',place:'宇治橋通り商店街',done:false},
+  {group:'京都採購',name:'京都和菓子',note:'優先選常溫與獨立包裝；生菓子當日食用',place:'京都駅 おみやげ',done:false},
+  {group:'京都採購',name:'神社寺院御守／御朱印',note:'只選有紀念意義的地點，避免重複購買',place:'三十三間堂',done:false},
+  {group:'生活與藥妝',name:'常備藥／休足用品',note:'依需求購買，不囤相似成分商品',place:'なんばウォーク ドラッグストア',done:false},
+  {group:'生活與藥妝',name:'盛夏補給',note:'防曬、濕紙巾、電解質飲品、冷感毛巾',place:'大阪高島屋',done:false},
+  {group:'生活與藥妝',name:'旅行收納與行李秤',note:'最後兩天確認重量與液體分裝',place:'ヨドバシカメラ マルチメディア梅田',done:false}
+];
+const defaultPacking = [
+  {name:'護照 ×3',done:false},{name:'電子機票與接送截圖',done:false},{name:'VJW 入境資料',done:false},
+  {name:'兒童常備藥／退燒藥',done:false},{name:'水壺與電解質飲品',done:false},{name:'替換上衣與小毛巾',done:false},
+  {name:'遮陽帽／防曬乳',done:false},{name:'薄外套（冷氣房）',done:false},{name:'行動電源與充電線',done:false}
+];
+const defaultDocs = [
+  {name:'護照有效期限確認',done:false},{name:'IT212／IT211 電子機票',done:false},{name:'VESSEL INN 訂房確認',done:false},
+  {name:'台灣機場接送確認',done:false},{name:'日本接送付款紀錄',done:false},{name:'旅遊平安險',done:false}
+];
+
+let state = loadState();
+let rate = Number(state.rate || .205);
+
+function mergeShopping(saved){
+  const old=Array.isArray(saved)?saved:[];
+  const byName=new Map(old.map(x=>[x.name,x]));
+  const merged=defaultShopping.map(x=>byName.has(x.name)?{...x,...byName.get(x.name)}:{...x});
+  old.forEach(x=>{if(!merged.some(m=>m.name===x.name))merged.push(x)});
+  return merged;
+}
+function loadState(){
+  try{
+    const saved = JSON.parse(localStorage.getItem(STORE_KEY) || '{}');
+    return {
+      shopping:mergeShopping(saved.shopping),
+      packing:Array.isArray(saved.packing)?saved.packing:structuredClone(defaultPacking),
+      docs:Array.isArray(saved.docs)?saved.docs:structuredClone(defaultDocs),
+      spends:saved.spends || {food:0,travel:0,shop:0},
+      rate:saved.rate || .205
+    };
+  }catch(e){return {shopping:structuredClone(defaultShopping),packing:structuredClone(defaultPacking),docs:structuredClone(defaultDocs),spends:{food:0,travel:0,shop:0},rate:.205}}
+}
+function saveState(show=true){
+  localStorage.setItem(STORE_KEY,JSON.stringify(state));
+  if(show) toast('已儲存到這台裝置');
+}
+function toast(msg){
+  const el=document.getElementById('toast'); el.textContent=msg; el.classList.add('show'); clearTimeout(toast.t); toast.t=setTimeout(()=>el.classList.remove('show'),1500);
+}
+function mapUrl(place){return 'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(place)}
+function money(v){return '¥'+Math.round(Number(v)||0).toLocaleString('zh-TW')}
+
+function go(id){
+  document.querySelectorAll('.view').forEach(v=>v.classList.toggle('active',v.id===id));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.toggle('active',b.dataset.go===id));
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-go]');if(b)go(b.dataset.go)});
+
+function renderHome(){
+  const now=new Date();
+  const diff=Math.ceil((TRIP_START-now)/86400000);
+  const countdown=document.getElementById('countdown');
+  countdown.textContent=diff>0?diff+' 天':(now<=TRIP_END?'旅行中':'已回家');
+  document.getElementById('dateChip').textContent=now.toLocaleDateString('zh-TW',{month:'2-digit',day:'2-digit',weekday:'short'});
+
+  const iso=now.toLocaleDateString('sv-SE',{timeZone:'Asia/Tokyo'});
+  let d=days.find(x=>x.date===iso);
+  if(!d){ d=now<TRIP_START?days[0]:days[days.length-1]; }
+  const dateParts=d.date.split('-');
+  document.getElementById('todayHeading').textContent=iso===d.date?'今天的安排':'下一個重要節點';
+  document.getElementById('todayCard').innerHTML=`
+    <div class="today-route"><div class="today-date"><b>${Number(dateParts[2])}</b><span>JUL · 週${d.dow}</span></div>
+      <div class="today-main"><h3>${d.title}</h3><p>${d.note}</p><div class="route-pills">${d.tags.map((t,i)=>`<span class="pill ${i===0?'coral':i===1?'teal':'mustard'}">${t}</span>`).join('')}</div></div></div>`;
+}
+
+function renderDays(){
+  document.getElementById('daysList').innerHTML=days.map((d,i)=>{
+    const md=d.date.slice(5).replace('-','/');
+    return `<details class="day-card" ${i===0?'open':''}>
+      <summary><div class="day-num"><div><small>DAY ${i+1}</small><b>${md}</b></div></div>
+        <div class="day-summary"><h3>${d.title}</h3><p>週${d.dow} · ${d.area}</p></div><div class="chev">⌄</div></summary>
+      <div class="day-body"><div class="day-rhythm">${d.tags.map((t,j)=>`<span class="pill ${j===0?'coral':j===1?'teal':'mustard'}">${t}</span>`).join('')}</div>
+        <div class="timeline">${d.stops.map(s=>`<div class="stop"><div class="stop-time">${s[0]}</div><div class="stop-dot"></div><div class="stop-content"><b>${s[1]}</b><p>${s[2]}</p>${s[3]?`<div class="stop-links"><a class="mini-link" target="_blank" rel="noopener" href="${mapUrl(s[3])}">📍 地圖</a></div>`:''}</div></div>`).join('')}</div>
+        <div class="day-note">💡 ${d.note}</div>
+      </div></details>`
+  }).join('');
+}
+
+
+function renderSideTrips(){
+  const root=document.getElementById('sideTripPlans');
+  if(!root)return;
+  root.innerHTML=sideTrips.map(p=>`<article class="plan-card"><h3>${p.title}</h3><p>${p.desc}</p><div class="plan-route">${p.stops.map(s=>`<div class="route-node"><b>${s.name}</b><span>${s.why}</span><span class="decision ${s.cls}">${s.decision}</span><div class="stop-links" style="margin-top:8px"><a class="mini-link" target="_blank" rel="noopener" href="${mapUrl(s.place)}">📍 地圖</a></div></div>`).join('')}</div><div class="plan-note">💡 ${p.note}</div></article>`).join('');
+}
+
+function renderShopping(){
+  const groups=[...new Set(state.shopping.map(x=>x.group))];
+  const done=state.shopping.filter(x=>x.done).length,total=state.shopping.length,pct=total?Math.round(done/total*100):0;
+  document.getElementById('shopCount').textContent=`${done} / ${total}`;
+  document.getElementById('shopPercent').textContent=pct+'%';
+  document.getElementById('shopProgress').style.width=pct+'%';
+  document.getElementById('shoppingGroups').innerHTML=groups.map(g=>{
+    const items=state.shopping.map((x,i)=>({...x,i})).filter(x=>x.group===g);
+    return `<div class="group-title"><span>${g}</span><small>${items.filter(x=>x.done).length}/${items.length}</small></div>
+      ${items.map(x=>`<div class="check-item ${x.done?'done':''}"><button class="check-box" onclick="toggleShopping(${x.i})">${x.done?'✓':''}</button><div class="check-copy"><b>${x.name}</b><span>${x.note}</span></div>${x.place?`<a class="check-map" target="_blank" rel="noopener" href="${mapUrl(x.place)}">↗</a>`:'<span></span>'}</div>`).join('')}`;
+  }).join('')+`<div class="group-title"><span>臨時想到</span><small>自行加入</small></div><div class="add-line"><input id="newShop" placeholder="新增想買的東西"><button onclick="addShopping()">加入</button></div>`;
+}
+window.toggleShopping=i=>{state.shopping[i].done=!state.shopping[i].done;saveState(false);renderShopping()};
+window.addShopping=()=>{const input=document.getElementById('newShop');const name=input.value.trim();if(!name)return;state.shopping.push({group:'臨時想到',name,note:'旅行中新增',place:'',done:false});input.value='';saveState();renderShopping()};
+
+function renderSimpleList(id,key){
+  const el=document.getElementById(id);
+  el.innerHTML=state[key].map((x,i)=>`<div class="check-item ${x.done?'done':''}" style="padding:12px 13px"><button class="check-box" onclick="toggleSimple('${key}',${i})">${x.done?'✓':''}</button><div class="check-copy"><b>${x.name}</b></div><span></span></div>`).join('');
+}
+window.toggleSimple=(key,i)=>{state[key][i].done=!state[key][i].done;saveState(false);renderSimpleList(key==='packing'?'packingList':'docsList',key)};
+
+function setupBudget(){
+  const ids={food:'foodSpend',travel:'travelSpend',shop:'shopSpend'};
+  Object.entries(ids).forEach(([k,id])=>{
+    const el=document.getElementById(id);el.value=state.spends[k]||0;
+    el.addEventListener('input',()=>{state.spends[k]=Number(el.value)||0;saveState(false);paintBudget()});
+  });paintBudget();
+}
+function paintBudget(){document.getElementById('daySpendTotal').textContent=money((state.spends.food||0)+(state.spends.travel||0)+(state.spends.shop||0))}
+
+function setupCurrency(){
+  const jpy=document.getElementById('jpyInput'),twd=document.getElementById('twdInput');
+  const paint=()=>{document.getElementById('rateText').textContent=`100 日圓 ≈ NT$${(rate*100).toFixed(2)}`;twd.value=((Number(jpy.value)||0)*rate).toFixed(0)};
+  jpy.addEventListener('input',paint);
+  twd.addEventListener('input',()=>{jpy.value=Math.round((Number(twd.value)||0)/rate)});
+  document.getElementById('refreshRate').addEventListener('click',async()=>{
+    const btn=document.getElementById('refreshRate');btn.textContent='更新中…';
+    try{const r=await fetch('https://open.er-api.com/v6/latest/JPY');const data=await r.json();if(data?.rates?.TWD){rate=data.rates.TWD;state.rate=rate;saveState(false);paint();toast('匯率已更新')}else throw new Error('bad response')}
+    catch(e){toast('無法連線，沿用目前匯率')}
+    finally{btn.textContent='更新匯率'}
+  });paint();
+}
+
+renderHome();renderDays();renderSideTrips();renderShopping();renderSimpleList('packingList','packing');renderSimpleList('docsList','docs');setupBudget();setupCurrency();
+
+/* ================= PWA ================= */
+let deferredInstallPrompt=null;
+const installBox=document.getElementById('pwaInstall');
+const installBtn=document.getElementById('pwaInstallBtn');
+const installHint=document.getElementById('pwaInstallHint');
+const dismissBtn=document.getElementById('pwaDismiss');
+const isIOS=/iphone|ipad|ipod/i.test(navigator.userAgent);
+const isStandalone=window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone===true;
+
+if('serviceWorker' in navigator){
+  window.addEventListener('load',()=>navigator.serviceWorker.register('./service-worker.js').catch(()=>{}));
+}
+window.addEventListener('beforeinstallprompt',e=>{
+  e.preventDefault();
+  deferredInstallPrompt=e;
+  if(!isStandalone && localStorage.getItem('pwa-install-dismissed')!=='1') installBox.classList.add('show');
+});
+if(isIOS && !isStandalone && localStorage.getItem('pwa-install-dismissed')!=='1'){
+  installHint.textContent='在 Safari 點「分享」→「加入主畫面」。';
+  installBtn.textContent='知道了';
+  setTimeout(()=>installBox.classList.add('show'),900);
+}
+installBtn.addEventListener('click',async()=>{
+  if(isIOS){ installBox.classList.remove('show'); return; }
+  if(!deferredInstallPrompt) return;
+  deferredInstallPrompt.prompt();
+  await deferredInstallPrompt.userChoice;
+  deferredInstallPrompt=null;
+  installBox.classList.remove('show');
+});
+dismissBtn.addEventListener('click',()=>{
+  installBox.classList.remove('show');
+  localStorage.setItem('pwa-install-dismissed','1');
+});
+window.addEventListener('appinstalled',()=>{installBox.classList.remove('show');toast('已加入主畫面')});
+
+</script>
+</body>
+</html>
