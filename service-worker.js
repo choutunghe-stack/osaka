@@ -1,21 +1,6 @@
-const CACHE='osaka-slow-trip-pwa-v1';
-const CORE=['./','./index.html','./manifest.webmanifest','./icons/icon-180.png','./icons/icon-192.png','./icons/icon-512.png'];
-self.addEventListener('install',event=>{
-  event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(CORE)).then(()=>self.skipWaiting()));
-});
-self.addEventListener('activate',event=>{
-  event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim()));
-});
-self.addEventListener('fetch',event=>{
-  if(event.request.method!=='GET') return;
-  const url=new URL(event.request.url);
-  if(url.origin===location.origin){
-    event.respondWith(caches.match(event.request).then(cached=>cached||fetch(event.request).then(resp=>{
-      const copy=resp.clone(); caches.open(CACHE).then(cache=>cache.put(event.request,copy)); return resp;
-    }).catch(()=>caches.match('./index.html'))));
-  }else{
-    event.respondWith(caches.match(event.request).then(cached=>cached||fetch(event.request).then(resp=>{
-      const copy=resp.clone(); caches.open(CACHE).then(cache=>cache.put(event.request,copy)); return resp;
-    }).catch(()=>cached)));
-  }
-});
+const CACHE='kansai-warm-ui-v6';
+const CORE=['./','./index.html','./manifest.webmanifest','./family-ui-v6.js','./icons/icon-180.png','./icons/icon-192.png','./icons/icon-512.png'];
+self.addEventListener('install',event=>{event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(CORE)).then(()=>self.skipWaiting()))});
+self.addEventListener('activate',event=>{event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});
+async function inject(response){if(!response||!response.ok)return response;const type=response.headers.get('content-type')||'';if(!type.includes('text/html'))return response;let html=await response.text();if(!html.includes('family-ui-v6.js'))html=html.replace('</body>','<script src="./family-ui-v6.js?v=6"></script></body>');const headers=new Headers(response.headers);headers.set('content-type','text/html; charset=utf-8');return new Response(html,{status:response.status,statusText:response.statusText,headers})}
+self.addEventListener('fetch',event=>{if(event.request.method!=='GET')return;const url=new URL(event.request.url);if(url.origin!==location.origin)return;const page=event.request.mode==='navigate'||url.pathname.endsWith('/')||url.pathname.endsWith('/index.html');if(page){event.respondWith(fetch(event.request,{cache:'no-store'}).then(inject).catch(async()=>inject(await caches.match('./index.html'))));return}event.respondWith(fetch(event.request).then(resp=>{const copy=resp.clone();caches.open(CACHE).then(cache=>cache.put(event.request,copy));return resp}).catch(()=>caches.match(event.request))) });
