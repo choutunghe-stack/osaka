@@ -1,5 +1,5 @@
-const CACHE='kansai-warm-ui-v33-motomachi-complete';
-const VERSION='33';
+const CACHE='kansai-warm-ui-v34-ijinkan-kobe-beef';
+const VERSION='34';
 const CORE=['./','./index.html','./manifest.webmanifest','./family-ui-v6.js','./today-live.js','./travel-tools-v31.js','./route-live-v15.js','./itinerary-live.js','./icons/icon-180.png','./icons/icon-192.png','./icons/icon-512.png'];
 self.addEventListener('install',event=>{event.waitUntil((async()=>{const cache=await caches.open(CACHE);await cache.addAll(CORE.map(x=>x.includes('.js')?`${x}?v=${VERSION}`:x));await self.skipWaiting()})())});
 self.addEventListener('activate',event=>{event.waitUntil((async()=>{const keys=await caches.keys();await Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k)));await self.clients.claim();const clients=await self.clients.matchAll({type:'window',includeUncontrolled:true});for(const client of clients){try{await client.navigate(`${client.url.split('?')[0]}?v=${VERSION}`)}catch(e){client.postMessage({type:'FORCE_REFRESH',version:VERSION})}}})())});
