@@ -2,7 +2,7 @@
 const routes={
 '2026-07-15':{area:'移動日',route:['桃園機場','關西機場','VESSEL INN NAMBA']},
 '2026-07-16':{area:'京都',route:['三十三間堂','下鴨神社・糺之森','鴨川三角洲','上賀茂神社','祇園祭宵山','VESSEL INN NAMBA']},
-'2026-07-17':{area:'神戶',route:['難波出發前往神戶','神戶舊居留地','南京町早午餐','神戶麵包超人兒童博物館','神戶塔','Meriken Park','Harborland・MOSAIC','返回 VESSEL INN NAMBA']},
+'2026-07-17':{area:'神戶',route:['難波出發前往神戶','生田神社','神戶舊居留地','南京町早午餐','神戶麵包超人兒童博物館','神戶塔','Meriken Park','Harborland・MOSAIC','返回 VESSEL INN NAMBA']},
 '2026-07-18':{area:'日本橋',route:['Den Den Town','Super Kids Land／Volks','Mandarake／駿河屋','Jungle','千日前晚餐','VESSEL INN NAMBA']},
 '2026-07-19':{area:'池田・梅田',route:['難波','杯麵博物館','池田午餐','Grand Front／LUCUA','大阪 Station City','VESSEL INN NAMBA']},
 '2026-07-20':{area:'難波',route:['Namba Parks','Namba City','午睡與室內休息','法善寺橫丁','道頓堀','VESSEL INN NAMBA']},
