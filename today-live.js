@@ -23,14 +23,16 @@ function apply(){
  const heading=document.getElementById('todayHeading');if(heading)heading.textContent='今天的安排';
  const chip=document.getElementById('dateChip');if(chip)chip.textContent=new Date().toLocaleDateString('zh-TW',{timeZone:'Asia/Tokyo',month:'2-digit',day:'2-digit',weekday:'short'});
  const today=document.getElementById('todayCard');
- if(today)today.innerHTML=`<div class="today-route"><div class="today-date"><b>${Number(parts[2])}</b><span>JUL · 週${d.dow}</span></div><div class="today-main"><h3>${d.title}</h3><p>${d.note}</p><div class="route-pills">${d.tags.map((t,i)=>`<span class="pill ${pillClass(i)}">${t}</span>`).join('')}</div></div></div>`;
+ const expected=`<div class="today-route"><div class="today-date"><b>${Number(parts[2])}</b><span>JUL · 週${d.dow}</span></div><div class="today-main"><h3>${d.title}</h3><p>${d.note}</p><div class="route-pills">${d.tags.map((t,i)=>`<span class="pill ${pillClass(i)}">${t}</span>`).join('')}</div></div></div>`;
+ if(today&&today.innerHTML!==expected)today.innerHTML=expected;
  const cards=[...document.querySelectorAll('#daysList .day-card')];
  let index=(typeof days!=='undefined'&&Array.isArray(days))?days.findIndex(x=>x.date===iso):-1;
  if(index<0&&iso==='2026-07-17')index=2;
  cards.forEach((card,i)=>card.open=i===index);
  if(cards[index])cards[index].dataset.today='true';
+ document.documentElement.dataset.liveDay=iso;
 }
-function schedule(){apply();setTimeout(apply,300);setTimeout(apply,1200);setTimeout(apply,3000)}
-if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',schedule);else schedule();
-window.addEventListener('pageshow',schedule);document.addEventListener('visibilitychange',()=>{if(!document.hidden)schedule()});
+function start(){apply();clearInterval(window.__todayLiveTimer);window.__todayLiveTimer=setInterval(apply,1000);}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start);else start();
+window.addEventListener('pageshow',start);window.addEventListener('focus',apply);document.addEventListener('visibilitychange',()=>{if(!document.hidden)start()});
 })();
