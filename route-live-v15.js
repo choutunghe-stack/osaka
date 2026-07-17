@@ -21,7 +21,7 @@ function apply(){
  const transit=root.querySelector('.v31-transit');if(transit)transit.textContent=`7/${Number(iso.slice(-2))} ${d.area}｜${d.note}`;
  const live=root.querySelector('.v31-live div');if(live)live.textContent=`今日路線｜${d.route.join(' → ')}。`;
 }
-function schedule(){apply();setTimeout(apply,500);setTimeout(apply,1600);setTimeout(apply,3200)}
-if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',schedule);else schedule();
-window.addEventListener('pageshow',schedule);document.addEventListener('visibilitychange',()=>{if(!document.hidden)schedule()});
+function start(){apply();clearInterval(window.__routeLiveTimer);window.__routeLiveTimer=setInterval(apply,1200);}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start);else start();
+window.addEventListener('pageshow',start);window.addEventListener('focus',apply);document.addEventListener('visibilitychange',()=>{if(!document.hidden)start()});
 })();
