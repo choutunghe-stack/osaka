@@ -25,8 +25,10 @@ const umedaStops=[
  ['之後','✓ 阪急梅田總店','在阪急梅田總店 B1 食品樓層逛街，並確認海外旅客服務與退稅位置。','阪急うめだ本店','done'],
  ['之後','✓ 阪急百貨退稅','已前往退稅櫃台辦理當日阪急梅田總店購物退稅。','阪急うめだ本店 免税カウンター','done'],
  ['之後','✓ Yodobashi Umeda 5F','已前往5樓玩具、模型與公仔區搜尋 HUNTER×HUNTER 與《神劍闖江湖／るろうに剣心》。','ヨドバシカメラ マルチメディア梅田','done'],
- ['最後一站','✓ 駿河屋梅田茶屋町店','已完成5、6樓模型與公仔賣場搜尋；店內包含新品、二手與動漫收藏品。','駿河屋 梅田茶屋町店','done'],
- ['返程','✓ 返回 VESSEL INN NAMBA','逛完駿河屋後沒有再加排 animate 或 Mandarake，直接由梅田搭車返回難波飯店。','VESSEL INN NAMBA','done']
+ ['之後','✓ 駿河屋梅田茶屋町店','已完成5、6樓模型與公仔賣場搜尋；店內包含新品、二手與動漫收藏品。','駿河屋 梅田茶屋町店','done'],
+ ['目前','心齋橋逛街','梅田採買結束後前往心齋橋，目前正在商圈內逛街。','心斎橋','current'],
+ ['接著','藥妝採買','準備在心齋橋購買一些藥妝；完成後不再加排其他景點。','心斎橋 ドラッグストア','next'],
+ ['返程','返回 VESSEL INN NAMBA','藥妝採買完成後直接返回難波飯店。','VESSEL INN NAMBA','planned']
 ];
 function timeline(stops){return stops.map(s=>`<div class="stop" data-status="${s[4]}"><div class="stop-time">${s[0]}</div><div class="stop-dot"></div><div class="stop-content"><b>${s[1]}</b><p>${s[2]}</p><div class="stop-links"><a class="mini-link" target="_blank" rel="noopener" href="${s[5]||mapUrl(s[3])}">📍 地圖</a></div></div></div>`).join('')}
 function patchCard(day,title,area,pills,stops,notes,version){
@@ -43,7 +45,7 @@ function patchCard(day,title,area,pills,stops,notes,version){
 function patch(){
  patchCard(17,'神戶行程已完成：MOSAIC 周邊散步後搭電車回飯店','神戶 · 週五',['✓ 神戶塔已到','✓ MOSAIC 周邊','✓ 已搭電車返程'],kobeStops,['🌙 實際收尾：神戶塔現場關閉後，前往 MOSAIC 附近簡單逛逛，沒有靠近主要設施，也未搭大摩天輪，之後直接搭電車返回難波。','✅ 7/17 神戶行程完成：生田神社 → 元町商店街 → 北野異人館 → 神戶牛 → 神戶塔外圍 → MOSAIC 周邊 → 搭電車回飯店。'],'38');
  patchCard(18,'日本橋與難波行程完成：空想機械館、BIC CAMERA、千日前、道頓堀','日本橋・難波 · 週六',['✓ 電器街','✓ 空想機械館','✓ 千日前・道頓堀'],osakaStops,['🛍️ 實際後半段：逛完日本橋與難波 PARKS，也參觀空想機械館；之後前往 BIC CAMERA 難波店，再沿千日前走到道頓堀。','✅ 7/18 實際路線：日本橋電器街 → 難波 PARKS／T-terrace → 空想機械館 → BIC CAMERA → 千日前 → 道頓堀 → 返回飯店。'],'40');
- patchCard(19,'梅田行程完成：逛完駿河屋後直接返回飯店','梅田・茶屋町 · 週日',['✓ 阪急退稅','✓ Yodobashi','✓ 駿河屋後返程'],umedaStops,['✅ 7/19 實際完成：西梅田 → 阪急梅田總店與退稅 → Yodobashi Umeda 5F → 駿河屋梅田茶屋町店 → 返回飯店。','🏨 駿河屋逛完後直接返回 VESSEL INN NAMBA，animate 梅田與 Mandarake 本次未再前往。'],'45');
+ patchCard(19,'目前在心齋橋：買完藥妝後返回飯店','梅田・心齋橋 · 週日',['✓ 梅田採買完成','現在：心齋橋','下一站：藥妝後返程'],umedaStops,['📍 目前位置：心齋橋商圈，準備再買一些藥妝。','🏨 接下來只保留藥妝採買，完成後直接返回 VESSEL INN NAMBA。'],'46');
 }
 function start(){patch();setTimeout(patch,350);setTimeout(patch,1200);clearInterval(window.__itineraryFixTimer);window.__itineraryFixTimer=setInterval(patch,1500)}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start);else start();
