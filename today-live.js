@@ -12,13 +12,22 @@ const schedule={
 };
 const iso=()=>new Intl.DateTimeFormat('sv-SE',{timeZone:'Asia/Tokyo',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
 const cls=i=>i===0?'coral':i===1?'teal':'mustard';
+let initialCardOpened=false;
+function openInitialCard(key){
+ if(initialCardOpened)return;
+ const cards=[...document.querySelectorAll('#daysList .day-card')];
+ if(!cards.length)return;
+ const idx=Number(key.slice(-2))-15;
+ if(!cards.some(c=>c.open)&&cards[idx])cards[idx].open=true;
+ initialCardOpened=true;
+}
 function apply(){
  const key=iso();const d=schedule[key];if(!d)return;
  const today=document.getElementById('todayCard');
  if(today)today.innerHTML=`<div class="today-route"><div class="today-date"><b>${Number(key.slice(-2))}</b><span>JUL · 週${d.dow}</span></div><div class="today-main"><h3>${d.title}</h3><p>${d.note}</p><div class="route-pills">${d.tags.map((t,i)=>`<span class="pill ${cls(i)}">${t}</span>`).join('')}</div></div></div>`;
  const heading=document.getElementById('todayHeading');if(heading)heading.textContent='今天的安排';
  const chip=document.getElementById('dateChip');if(chip)chip.textContent=new Date().toLocaleDateString('zh-TW',{timeZone:'Asia/Tokyo',month:'2-digit',day:'2-digit',weekday:'short'});
- const cards=[...document.querySelectorAll('#daysList .day-card')];const idx=Number(key.slice(-2))-15;cards.forEach((c,i)=>c.open=i===idx);
+ openInitialCard(key);
 }
 function start(){apply();clearInterval(window.__todayFixTimer);window.__todayFixTimer=setInterval(apply,1000)}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start);else start();
