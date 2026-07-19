@@ -23,10 +23,13 @@ const osakaStops=[
 const umedaStops=[
  ['稍早','✓ 西梅田（已抵達）','已抵達西梅田地下街一帶，之後移動到大阪梅田站周邊。','西梅田駅','done'],
  ['之後','✓ 阪急梅田本店','在阪急梅田總店 B1 食品樓層逛街，並確認海外旅客服務與退稅位置。','阪急うめだ本店','done'],
- ['剛剛','✓ 阪急百貨退稅','已前往退稅櫃台辦理當日阪急梅田總店購物退稅。','阪急うめだ本店 免税カウンター','done'],
- ['推薦下一站','Yodobashi Umeda 5F 模型／公仔','可辦免稅，5樓集中玩具、模型與公仔；先找 HUNTER×HUNTER 與《神劍闖江湖／るろうに剣心》。','ヨドバシカメラ マルチメディア梅田','next'],
- ['備選','Mandarake 梅田店 3F TOY','全店提供外國旅客免稅，適合找二手、舊款與絕版角色公仔；營業至 20:00。','まんだらけ うめだ店','todo'],
- ['晚間','返回 VESSEL INN NAMBA','模型找完後由梅田或東梅田搭地鐵返回難波。','VESSEL INN NAMBA','todo']
+ ['之後','✓ 阪急百貨退稅','已前往退稅櫃台辦理當日阪急梅田總店購物退稅。','阪急うめだ本店 免税カウンター','done'],
+ ['之後','✓ Yodobashi Umeda 5F','已前往5樓玩具、模型與公仔區搜尋 HUNTER×HUNTER 與《神劍闖江湖／るろうに剣心》。','ヨドバシカメラ マルチメディア梅田','done'],
+ ['剛剛','✓ 駿河屋梅田茶屋町店','已完成5、6樓模型與公仔賣場搜尋；店內包含新品、二手與動漫收藏品。','駿河屋 梅田茶屋町店','done'],
+ ['下一站','animate 梅田（NU茶屋町3F）','從駿河屋步行短程返回 NU茶屋町；整個3樓都是動漫商品、書籍與角色周邊，適合再補找獵人與神劍商品。','アニメイト梅田','next'],
+ ['選配','Mandarake 梅田店','若仍想找二手、舊版或絕版公仔，再前往 Mandarake；不再找模型則直接省略。','まんだらけ うめだ店','todo'],
+ ['晚餐','Grand Front／LUCUA／LINKS UMEDA','逛完後回大阪站商場吃飯、讓孩子休息，再視體力返程。','グランフロント大阪','todo'],
+ ['晚間','返回 VESSEL INN NAMBA','由梅田或東梅田搭地鐵返回難波，不再安排遠距離景點。','VESSEL INN NAMBA','todo']
 ];
 function timeline(stops){return stops.map(s=>`<div class="stop" data-status="${s[4]}"><div class="stop-time">${s[0]}</div><div class="stop-dot"></div><div class="stop-content"><b>${s[1]}</b><p>${s[2]}</p><div class="stop-links"><a class="mini-link" target="_blank" rel="noopener" href="${s[5]||mapUrl(s[3])}">📍 地圖</a></div></div></div>`).join('')}
 function patchCard(day,title,area,pills,stops,notes,version){
@@ -43,7 +46,7 @@ function patchCard(day,title,area,pills,stops,notes,version){
 function patch(){
  patchCard(17,'神戶行程已完成：MOSAIC 周邊散步後搭電車回飯店','神戶 · 週五',['✓ 神戶塔已到','✓ MOSAIC 周邊','✓ 已搭電車返程'],kobeStops,['🌙 實際收尾：神戶塔現場關閉後，前往 MOSAIC 附近簡單逛逛，沒有靠近主要設施，也未搭大摩天輪，之後直接搭電車返回難波。','✅ 7/17 神戶行程完成：生田神社 → 元町商店街 → 北野異人館 → 神戶牛 → 神戶塔外圍 → MOSAIC 周邊 → 搭電車回飯店。'],'38');
  patchCard(18,'日本橋與難波行程完成：空想機械館、BIC CAMERA、千日前、道頓堀','日本橋・難波 · 週六',['✓ 電器街','✓ 空想機械館','✓ 千日前・道頓堀'],osakaStops,['🛍️ 實際後半段：逛完日本橋與難波 PARKS，也參觀空想機械館；之後前往 BIC CAMERA 難波店，再沿千日前走到道頓堀。','✅ 7/18 實際路線：日本橋電器街 → 難波 PARKS／T-terrace → 空想機械館 → BIC CAMERA → 千日前 → 道頓堀 → 返回飯店。'],'40');
- patchCard(19,'阪急百貨退稅完成，下一站找獵人與神劍闖江湖模型','梅田 · 週日',['✓ 阪急退稅','下一站：Yodobashi 5F','目標：獵人／神劍'],umedaStops,['🧾 目前進度：西梅田 → 阪急梅田總店 → 退稅完成。','🎯 模型優先順序：先到 Yodobashi Umeda 5F 找新品公仔；若要找舊款、二手或絕版，再去 Mandarake 梅田店 3F TOY。'],'43');
+ patchCard(19,'駿河屋模型搜尋完成，下一站 animate 梅田','梅田 · 週日',['✓ Yodobashi','✓ 駿河屋完成','下一站：animate'],umedaStops,['🎯 目前完成：阪急百貨退稅 → Yodobashi Umeda 5F → 駿河屋梅田茶屋町店。','➡️ 最順下一站：步行到附近 NU茶屋町3F animate 梅田；若已不想繼續找動漫商品，直接回 Grand Front／LUCUA／LINKS UMEDA 吃飯休息。'],'44');
 }
 function start(){patch();setTimeout(patch,350);setTimeout(patch,1200);clearInterval(window.__itineraryFixTimer);window.__itineraryFixTimer=setInterval(patch,1500)}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start);else start();
