@@ -30,6 +30,11 @@ const umedaStops=[
  ['接著','藥妝採買','準備在心齋橋購買一些藥妝；完成後不再加排其他景點。','心斎橋 ドラッグストア','next'],
  ['返程','返回 VESSEL INN NAMBA','藥妝採買完成後直接返回難波飯店。','VESSEL INN NAMBA','planned']
 ];
+const nambaStops=[
+ ['今天','✓ 心齋橋 PARCO','今天已前往大丸心齋橋店旁的心齋橋 PARCO 逛街。','心斎橋PARCO','done'],
+ ['之後','✓ 法善寺','之後前往法善寺與周邊巷弄參拜、散步。','法善寺 大阪','done'],
+ ['目前','後續行程待更新','目前已確認完成心齋橋 PARCO 與法善寺；其餘行程尚未回報。','法善寺 大阪','current']
+];
 function timeline(stops){return stops.map(s=>`<div class="stop" data-status="${s[4]}"><div class="stop-time">${s[0]}</div><div class="stop-dot"></div><div class="stop-content"><b>${s[1]}</b><p>${s[2]}</p><div class="stop-links"><a class="mini-link" target="_blank" rel="noopener" href="${s[5]||mapUrl(s[3])}">📍 地圖</a></div></div></div>`).join('')}
 function patchCard(day,title,area,pills,stops,notes,version){
  const cards=[...document.querySelectorAll('#daysList .day-card')];
@@ -46,6 +51,7 @@ function patch(){
  patchCard(17,'神戶行程已完成：MOSAIC 周邊散步後搭電車回飯店','神戶 · 週五',['✓ 神戶塔已到','✓ MOSAIC 周邊','✓ 已搭電車返程'],kobeStops,['🌙 實際收尾：神戶塔現場關閉後，前往 MOSAIC 附近簡單逛逛，沒有靠近主要設施，也未搭大摩天輪，之後直接搭電車返回難波。','✅ 7/17 神戶行程完成：生田神社 → 元町商店街 → 北野異人館 → 神戶牛 → 神戶塔外圍 → MOSAIC 周邊 → 搭電車回飯店。'],'38');
  patchCard(18,'日本橋與難波行程完成：空想機械館、BIC CAMERA、千日前、道頓堀','日本橋・難波 · 週六',['✓ 電器街','✓ 空想機械館','✓ 千日前・道頓堀'],osakaStops,['🛍️ 實際後半段：逛完日本橋與難波 PARKS，也參觀空想機械館；之後前往 BIC CAMERA 難波店，再沿千日前走到道頓堀。','✅ 7/18 實際路線：日本橋電器街 → 難波 PARKS／T-terrace → 空想機械館 → BIC CAMERA → 千日前 → 道頓堀 → 返回飯店。'],'40');
  patchCard(19,'目前在心齋橋：買完藥妝後返回飯店','梅田・心齋橋 · 週日',['✓ 梅田採買完成','現在：心齋橋','下一站：藥妝後返程'],umedaStops,['📍 目前位置：心齋橋商圈，準備再買一些藥妝。','🏨 接下來只保留藥妝採買，完成後直接返回 VESSEL INN NAMBA。'],'46');
+ patchCard(20,'今天已去心齋橋 PARCO 與法善寺','心齋橋・難波 · 週一',['✓ 心齋橋 PARCO','✓ 法善寺','後續待更新'],nambaStops,['✅ 今天已確認完成：心齋橋 PARCO → 法善寺。','📝 目前只記錄已回報的實際行程，尚未將其他原訂景點標記為完成。'],'47');
 }
 function start(){patch();setTimeout(patch,350);setTimeout(patch,1200);clearInterval(window.__itineraryFixTimer);window.__itineraryFixTimer=setInterval(patch,1500)}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start);else start();
