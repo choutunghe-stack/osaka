@@ -42,6 +42,14 @@ const ujiStops=[
  ['接著','京阪宇治站','抵達京阪宇治站後，再依體力安排平等院、宇治橋與表參道。','京阪宇治駅','todo'],
  ['返程','返回 VESSEL INN NAMBA','宇治行程結束後返回大阪，晚間回難波飯店休息。','VESSEL INN NAMBA','todo']
 ];
+const tomorrowStops=[
+ ['09:15','從 VESSEL INN NAMBA 出發','搭大阪 Metro 前往扇町站，避免在正午高溫下長距離步行。','キッズプラザ大阪','todo'],
+ ['09:45–12:30','Kids Plaza Osaka','尚未去過的全室內親子主線；2歲5個月幼兒免費。7/22仍有適合學齡前兒童與家長參加的電車操作活動。','キッズプラザ大阪','todo'],
+ ['12:30–13:30','天神橋筋商店街午餐','從 Kids Plaza 附近進入商店街，在有冷氣或拱廊的店家用餐，不安排曝曬排隊名店。','天神橋筋商店街','todo'],
+ ['14:00–15:30','大阪くらしの今昔館','前往天神橋筋六丁目站直結的室內博物館，看江戶時代大阪街景；也是尚未去過的景點。','大阪くらしの今昔館','todo'],
+ ['16:30–18:00','返回難波最後採買','回到難波後只處理尚未買齊的物品，不再跨區增加景點。','なんば','todo'],
+ ['18:30前','返回 VESSEL INN NAMBA','提早回飯店整理行李、確認隔日機場交通與護照。','VESSEL INN NAMBA','todo']
+];
 function timeline(stops){return stops.map(s=>`<div class="stop" data-status="${s[4]}"><div class="stop-time">${s[0]}</div><div class="stop-dot"></div><div class="stop-content"><b>${s[1]}</b><p>${s[2]}</p><div class="stop-links"><a class="mini-link" target="_blank" rel="noopener" href="${s[5]||mapUrl(s[3])}">📍 地圖</a></div></div></div>`).join('')}
 function patchCard(day,title,area,pills,stops,notes,version){
  const cards=[...document.querySelectorAll('#daysList .day-card')];
@@ -60,6 +68,7 @@ function patch(){
  patchCard(19,'梅田行程完成，駿河屋後直接返回飯店','梅田・茶屋町 · 週日',['✓ 阪急退稅','✓ Yodobashi','✓ 駿河屋後返程'],umedaStops,['✅ 7/19 實際完成：西梅田 → 阪急梅田總店與退稅 → Yodobashi Umeda 5F → 駿河屋梅田茶屋町店 → 返回飯店。','📝 駿河屋為當日最後一站，沒有再去 animate 或 Mandarake。'],'45');
  patchCard(20,'難波行程完成：PARCO、法善寺、千日前與 CoCo壱番屋','心齋橋・難波 · 週一',['✓ 心齋橋 PARCO','✓ 法善寺・千日前','✓ CoCo壱番屋晚餐'],nambaStops,['✅ 7/20 實際路線：心齋橋 PARCO → 法善寺 → 難波千日前商店街 → CoCo壱番屋晚餐 → 返回 VESSEL INN NAMBA。','🍛 晚餐已確認為 CoCo壱番屋；因未確認分店名稱，網站以難波／千日前一帶記錄。'],'49');
  patchCard(21,'早上高島屋，現在搭京阪特急前往中書島轉宇治','大阪・宇治 · 週二',['✓ 大阪高島屋','現在：前往中書島','下一站：宇治線'],ujiStops,['🚆 目前搭乘往出町柳方向的京阪特急；中書島是特急停靠站。','➡️ 到中書島後不要出站，跟著「宇治線・宇治方面」到3或4號月台轉乘，即可前往京阪宇治站。'],'50');
+ patchCard(22,'室內親子新路線：Kids Plaza、天神橋筋與今昔館','大阪市區 · 週三',['全室內主線','2歲5個月免費','18:30前返飯店'],tomorrowStops,['🌡️ 明日大阪預報接近37°C，取消長時間戶外與跨區行程，改排尚未去過且移動集中的室內路線。','👶 若孩子午後疲累，可省略今昔館，直接回難波完成採買並整理行李。'],'51');
 }
 function start(){patch();setTimeout(patch,350);setTimeout(patch,1200);clearInterval(window.__itineraryFixTimer);window.__itineraryFixTimer=setInterval(patch,1500)}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start);else start();
