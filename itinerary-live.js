@@ -35,6 +35,13 @@ const nambaStops=[
  ['晚餐','✓ CoCo壱番屋','晚餐實際在 CoCo壱番屋吃日式咖哩；未確認分店名稱，記錄為難波／千日前一帶。','CoCo壱番屋 難波 千日前','done'],
  ['返程','✓ 返回 VESSEL INN NAMBA','吃完 CoCo壱番屋後返回飯店，7/20 行程完成。','VESSEL INN NAMBA','done']
 ];
+const ujiStops=[
+ ['早上','✓ 大阪高島屋','今天早上先到大阪高島屋逛街，之後再前往宇治。','大阪高島屋','done'],
+ ['目前','京阪特急前往中書島','目前搭乘往出町柳方向的京阪特急，準備在中書島轉乘宇治線。','中書島駅','current'],
+ ['轉乘','中書島 3／4號月台 → 宇治線','抵達中書島後不要出站，依「宇治線・宇治方面」指示前往3或4號月台，搭往宇治的列車。','中書島駅','next'],
+ ['接著','京阪宇治站','抵達京阪宇治站後，再依體力安排平等院、宇治橋與表參道。','京阪宇治駅','todo'],
+ ['返程','返回 VESSEL INN NAMBA','宇治行程結束後返回大阪，晚間回難波飯店休息。','VESSEL INN NAMBA','todo']
+];
 function timeline(stops){return stops.map(s=>`<div class="stop" data-status="${s[4]}"><div class="stop-time">${s[0]}</div><div class="stop-dot"></div><div class="stop-content"><b>${s[1]}</b><p>${s[2]}</p><div class="stop-links"><a class="mini-link" target="_blank" rel="noopener" href="${s[5]||mapUrl(s[3])}">📍 地圖</a></div></div></div>`).join('')}
 function patchCard(day,title,area,pills,stops,notes,version){
  const cards=[...document.querySelectorAll('#daysList .day-card')];
@@ -52,6 +59,7 @@ function patch(){
  patchCard(18,'日本橋與難波行程完成：空想機械館、BIC CAMERA、千日前、道頓堀','日本橋・難波 · 週六',['✓ 電器街','✓ 空想機械館','✓ 千日前・道頓堀'],osakaStops,['🛍️ 實際後半段：逛完日本橋與難波 PARKS，也參觀空想機械館；之後前往 BIC CAMERA 難波店，再沿千日前走到道頓堀。','✅ 7/18 實際路線：日本橋電器街 → 難波 PARKS／T-terrace → 空想機械館 → BIC CAMERA → 千日前 → 道頓堀 → 返回飯店。'],'40');
  patchCard(19,'梅田行程完成，駿河屋後直接返回飯店','梅田・茶屋町 · 週日',['✓ 阪急退稅','✓ Yodobashi','✓ 駿河屋後返程'],umedaStops,['✅ 7/19 實際完成：西梅田 → 阪急梅田總店與退稅 → Yodobashi Umeda 5F → 駿河屋梅田茶屋町店 → 返回飯店。','📝 駿河屋為當日最後一站，沒有再去 animate 或 Mandarake。'],'45');
  patchCard(20,'難波行程完成：PARCO、法善寺、千日前與 CoCo壱番屋','心齋橋・難波 · 週一',['✓ 心齋橋 PARCO','✓ 法善寺・千日前','✓ CoCo壱番屋晚餐'],nambaStops,['✅ 7/20 實際路線：心齋橋 PARCO → 法善寺 → 難波千日前商店街 → CoCo壱番屋晚餐 → 返回 VESSEL INN NAMBA。','🍛 晚餐已確認為 CoCo壱番屋；因未確認分店名稱，網站以難波／千日前一帶記錄。'],'49');
+ patchCard(21,'早上高島屋，現在搭京阪特急前往中書島轉宇治','大阪・宇治 · 週二',['✓ 大阪高島屋','現在：前往中書島','下一站：宇治線'],ujiStops,['🚆 目前搭乘往出町柳方向的京阪特急；中書島是特急停靠站。','➡️ 到中書島後不要出站，跟著「宇治線・宇治方面」到3或4號月台轉乘，即可前往京阪宇治站。'],'50');
 }
 function start(){patch();setTimeout(patch,350);setTimeout(patch,1200);clearInterval(window.__itineraryFixTimer);window.__itineraryFixTimer=setInterval(patch,1500)}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start);else start();
