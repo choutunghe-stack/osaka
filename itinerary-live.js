@@ -31,8 +31,9 @@ const umedaStops=[
 const nambaStops=[
  ['白天','✓ 心齋橋 PARCO','已前往大丸心齋橋店旁的心齋橋 PARCO 逛街。','心斎橋PARCO','done'],
  ['之後','✓ 法善寺','之後前往法善寺與周邊巷弄參拜、散步。','法善寺 大阪','done'],
- ['晚間','✓ 難波千日前商店街','晚間走進難波千日前商店街，沿商店街查看餐廳與周邊店家；未記錄特定用餐店名。','なんば千日前商店街','done'],
- ['返程','✓ 返回 VESSEL INN NAMBA','結束心齋橋、法善寺與千日前行程後返回飯店，7/20 行程完成。','VESSEL INN NAMBA','done']
+ ['晚間','✓ 難波千日前商店街','晚間走進難波千日前商店街，沿商店街逛街並尋找晚餐。','なんば千日前商店街','done'],
+ ['晚餐','✓ CoCo壱番屋','晚餐實際在 CoCo壱番屋吃日式咖哩；未確認分店名稱，記錄為難波／千日前一帶。','CoCo壱番屋 難波 千日前','done'],
+ ['返程','✓ 返回 VESSEL INN NAMBA','吃完 CoCo壱番屋後返回飯店，7/20 行程完成。','VESSEL INN NAMBA','done']
 ];
 function timeline(stops){return stops.map(s=>`<div class="stop" data-status="${s[4]}"><div class="stop-time">${s[0]}</div><div class="stop-dot"></div><div class="stop-content"><b>${s[1]}</b><p>${s[2]}</p><div class="stop-links"><a class="mini-link" target="_blank" rel="noopener" href="${s[5]||mapUrl(s[3])}">📍 地圖</a></div></div></div>`).join('')}
 function patchCard(day,title,area,pills,stops,notes,version){
@@ -50,7 +51,7 @@ function patch(){
  patchCard(17,'神戶行程已完成：MOSAIC 周邊散步後搭電車回飯店','神戶 · 週五',['✓ 神戶塔已到','✓ MOSAIC 周邊','✓ 已搭電車返程'],kobeStops,['🌙 實際收尾：神戶塔現場關閉後，前往 MOSAIC 附近簡單逛逛，沒有靠近主要設施，也未搭大摩天輪，之後直接搭電車返回難波。','✅ 7/17 神戶行程完成：生田神社 → 元町商店街 → 北野異人館 → 神戶牛 → 神戶塔外圍 → MOSAIC 周邊 → 搭電車回飯店。'],'38');
  patchCard(18,'日本橋與難波行程完成：空想機械館、BIC CAMERA、千日前、道頓堀','日本橋・難波 · 週六',['✓ 電器街','✓ 空想機械館','✓ 千日前・道頓堀'],osakaStops,['🛍️ 實際後半段：逛完日本橋與難波 PARKS，也參觀空想機械館；之後前往 BIC CAMERA 難波店，再沿千日前走到道頓堀。','✅ 7/18 實際路線：日本橋電器街 → 難波 PARKS／T-terrace → 空想機械館 → BIC CAMERA → 千日前 → 道頓堀 → 返回飯店。'],'40');
  patchCard(19,'梅田行程完成，駿河屋後直接返回飯店','梅田・茶屋町 · 週日',['✓ 阪急退稅','✓ Yodobashi','✓ 駿河屋後返程'],umedaStops,['✅ 7/19 實際完成：西梅田 → 阪急梅田總店與退稅 → Yodobashi Umeda 5F → 駿河屋梅田茶屋町店 → 返回飯店。','📝 駿河屋為當日最後一站，沒有再去 animate 或 Mandarake。'],'45');
- patchCard(20,'難波行程完成：PARCO、法善寺與千日前後返飯店','心齋橋・難波 · 週一',['✓ 心齋橋 PARCO','✓ 法善寺・千日前','✓ 已返回飯店'],nambaStops,['✅ 7/20 實際路線：心齋橋 PARCO → 法善寺 → 難波千日前商店街 → 返回 VESSEL INN NAMBA。','🍽️ 晚間曾在千日前查看附近餐廳，但未確認最後用餐店家，因此網站不記錄特定餐廳名稱。'],'48');
+ patchCard(20,'難波行程完成：PARCO、法善寺、千日前與 CoCo壱番屋','心齋橋・難波 · 週一',['✓ 心齋橋 PARCO','✓ 法善寺・千日前','✓ CoCo壱番屋晚餐'],nambaStops,['✅ 7/20 實際路線：心齋橋 PARCO → 法善寺 → 難波千日前商店街 → CoCo壱番屋晚餐 → 返回 VESSEL INN NAMBA。','🍛 晚餐已確認為 CoCo壱番屋；因未確認分店名稱，網站以難波／千日前一帶記錄。'],'49');
 }
 function start(){patch();setTimeout(patch,350);setTimeout(patch,1200);clearInterval(window.__itineraryFixTimer);window.__itineraryFixTimer=setInterval(patch,1500)}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start);else start();
