@@ -45,10 +45,9 @@ const ujiStops=[
  ['晚餐','✓ 美津の大阪燒','晚餐實際在道頓堀的美津の（Mizuno）吃大阪燒，作為當日收尾。','お好み焼 美津の','done']
 ];
 const rinkuStops=[
- ['今天','從 VESSEL INN NAMBA 前往臨空城','最後一天改往臨空城，以逛街、用餐與親子休息為主；原訂 Kids Plaza 與今昔館取消。','りんくうタウン駅','current'],
- ['抵達後','臨空城 Premium Outlets','媽媽安排購物，小朋友以推車休息或短時間走動為主；尚未回報抵達，因此暫不標記完成。','りんくうプレミアム・アウトレット','next'],
- ['依體力','Rinku Pleasure Town SEACLE','孩子需要換尿布、用餐或稍微活動時可轉往 SEACLE；是否實際前往待回報。','りんくうプレジャータウン シークル','todo'],
- ['傍晚','返回 VESSEL INN NAMBA','今天不再增加其他遠程景點，回飯店完成行李整理與回程準備。','VESSEL INN NAMBA','todo']
+ ['白天','✓ 臨空城','最後一天已前往臨空城，以逛街與購物為主。','りんくうタウン駅','done'],
+ ['之後','✓ EDION（愛電王）','離開臨空城後前往 EDION，購買任天堂點數卡與瑪利歐商品；分店未確認。','EDION 大阪 難波','done'],
+ ['返程','返回 VESSEL INN NAMBA','完成最後採買後返回飯店整理行李與回程物品；實際返抵時間尚未回報。','VESSEL INN NAMBA','todo']
 ];
 function timeline(stops){return stops.map(s=>`<div class="stop" data-status="${s[4]}"><div class="stop-time">${s[0]}</div><div class="stop-dot"></div><div class="stop-content"><b>${s[1]}</b><p>${s[2]}</p><div class="stop-links"><a class="mini-link" target="_blank" rel="noopener" href="${s[5]||mapUrl(s[3])}">📍 地圖</a></div></div></div>`).join('')}
 function patchCard(day,title,area,pills,stops,notes,version){
@@ -68,7 +67,7 @@ function patch(){
  patchCard(19,'梅田行程完成，駿河屋後直接返回飯店','梅田・茶屋町 · 週日',['✓ 阪急退稅','✓ Yodobashi','✓ 駿河屋後返程'],umedaStops,['✅ 7/19 實際完成：西梅田 → 阪急梅田總店與退稅 → Yodobashi Umeda 5F → 駿河屋梅田茶屋町店 → 返回飯店。','📝 駿河屋為當日最後一站，沒有再去 animate 或 Mandarake。'],'45');
  patchCard(20,'難波行程完成：PARCO、法善寺、千日前與 CoCo壱番屋','心齋橋・難波 · 週一',['✓ 心齋橋 PARCO','✓ 法善寺・千日前','✓ CoCo壱番屋晚餐'],nambaStops,['✅ 7/20 實際路線：心齋橋 PARCO → 法善寺 → 難波千日前商店街 → CoCo壱番屋晚餐 → 返回 VESSEL INN NAMBA。','🍛 晚餐已確認為 CoCo壱番屋；因未確認分店名稱，網站以難波／千日前一帶記錄。'],'49');
  patchCard(21,'宇治與道頓堀行程完成：平等院、抹茶與美津の大阪燒','大阪・宇治・道頓堀 · 週二',['✓ 宇治平等院','✓ 中村藤吉抹茶','✓ 美津の大阪燒'],ujiStops,['✅ 7/21 實際路線：大阪高島屋 → 中書島轉乘 → 宇治平等院 → 中村藤吉抹茶 → 返回難波 → 道頓堀 → 美津の大阪燒。','🍵 中村藤吉的分店未確認；網站以宇治店家泛稱記錄。晚餐店名依官方名稱修正為「美津の（Mizuno）」。'],'52');
- patchCard(22,'最後一天改去臨空城：Outlet逛街與親子休息','臨空城 · 週三',['今天改去臨空城','媽媽逛Outlet','SEACLE依體力'],rinkuStops,['🛍️ 今天取消 Kids Plaza、天神橋筋與今昔館，改去臨空城購物。','👶 小朋友以推車休息、用餐與短時間活動為主；Outlet及SEACLE尚未回報實際到訪，暫不標記完成。'],'53');
+ patchCard(22,'最後一天：臨空城後到 EDION 完成最後採買','臨空城・大阪 · 週三',['✓ 臨空城','✓ EDION點數卡','✓ 瑪利歐商品'],rinkuStops,['✅ 7/22 已確認：臨空城 → EDION（愛電王）購買任天堂點數卡與瑪利歐商品。','📝 EDION分店與返回飯店時間尚未確認，因此不自行補填。'],'54');
 }
 function start(){patch();setTimeout(patch,350);setTimeout(patch,1200);clearInterval(window.__itineraryFixTimer);window.__itineraryFixTimer=setInterval(patch,1500)}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start);else start();
