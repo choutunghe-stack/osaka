@@ -7,7 +7,7 @@ const schedule={
 '2026-07-19':{dow:'日',area:'梅田・茶屋町',title:'梅田行程完成，駿河屋後直接返回飯店',note:'完成阪急梅田總店購物與退稅、Yodobashi Umeda 5樓模型區，以及駿河屋梅田茶屋町店；逛完駿河屋後沒有再加排其他店，直接返回 VESSEL INN NAMBA。',tags:['✓ 阪急退稅','✓ Yodobashi','✓ 駿河屋後返程']},
 '2026-07-20':{dow:'一',area:'心齋橋・難波',title:'難波行程完成：PARCO、法善寺與 CoCo壱番屋',note:'完成心齋橋 PARCO、法善寺與難波千日前商店街，晚餐在 CoCo壱番屋吃日式咖哩，之後返回 VESSEL INN NAMBA。',tags:['✓ 心齋橋 PARCO','✓ 法善寺・千日前','✓ CoCo壱番屋晚餐']},
 '2026-07-21':{dow:'二',area:'大阪・宇治・道頓堀',title:'宇治與道頓堀行程完成',note:'早上先到大阪高島屋，再搭京阪電車前往宇治；完成平等院、在中村藤吉品嚐抹茶，返回大阪後逛道頓堀，晚餐在美津の（Mizuno）吃大阪燒。',tags:['✓ 宇治平等院','✓ 中村藤吉抹茶','✓ 美津の大阪燒']},
-'2026-07-22':{dow:'三',area:'臨空城',title:'最後一天改去臨空城',note:'取消原訂 Kids Plaza、天神橋筋與今昔館，今天改往臨空城；以 Premium Outlets 購物為主，小朋友以推車休息、用餐及短時間活動為主，SEACLE依體力決定。',tags:['今天改去臨空城','媽媽逛Outlet','SEACLE依體力']},
+'2026-07-22':{dow:'三',area:'臨空城・大阪',title:'臨空城後到 EDION 完成最後採買',note:'今天已去臨空城，之後到 EDION（愛電王）購買任天堂點數卡與瑪利歐商品；EDION分店與返回飯店時間尚未確認。',tags:['✓ 臨空城','✓ EDION點數卡','✓ 瑪利歐商品']},
 '2026-07-23':{dow:'四',area:'回程',title:'直接前往關西機場',note:'07:30–07:45 從飯店出發，不再安排市區補買。',tags:['早起','不補買','11:45起飛']}
 };
 const iso=()=>new Intl.DateTimeFormat('sv-SE',{timeZone:'Asia/Tokyo',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
