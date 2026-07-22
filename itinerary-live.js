@@ -47,7 +47,12 @@ const ujiStops=[
 const rinkuStops=[
  ['白天','✓ 臨空城','最後一天已前往臨空城，以逛街與購物為主。','りんくうタウン駅','done'],
  ['之後','✓ EDION（愛電王）','離開臨空城後前往 EDION，購買任天堂點數卡與瑪利歐商品；分店未確認。','EDION 大阪 難波','done'],
- ['返程','返回 VESSEL INN NAMBA','完成最後採買後返回飯店整理行李與回程物品；實際返抵時間尚未回報。','VESSEL INN NAMBA','todo']
+ ['返程','✓ 返回 VESSEL INN NAMBA','完成最後採買後返回飯店，整理行李與隔日回程物品。','VESSEL INN NAMBA','done']
+];
+const returnStops=[
+ ['早上','✓ VESSEL INN NAMBA 退房','完成退房後前往關西國際機場。','VESSEL INN NAMBA','done'],
+ ['機場','✓ 關西國際機場','抵達機場後辦理回程手續，準備搭機返台。','関西国際空港','done'],
+ ['返台','✓ 搭機返回台灣','今天已從關西機場搭機返回台灣，7/15–7/23 關西家庭旅行全部完成。','桃園國際機場','done']
 ];
 function timeline(stops){return stops.map(s=>`<div class="stop" data-status="${s[4]}"><div class="stop-time">${s[0]}</div><div class="stop-dot"></div><div class="stop-content"><b>${s[1]}</b><p>${s[2]}</p><div class="stop-links"><a class="mini-link" target="_blank" rel="noopener" href="${s[5]||mapUrl(s[3])}">📍 地圖</a></div></div></div>`).join('')}
 function patchCard(day,title,area,pills,stops,notes,version){
@@ -67,7 +72,8 @@ function patch(){
  patchCard(19,'梅田行程完成，駿河屋後直接返回飯店','梅田・茶屋町 · 週日',['✓ 阪急退稅','✓ Yodobashi','✓ 駿河屋後返程'],umedaStops,['✅ 7/19 實際完成：西梅田 → 阪急梅田總店與退稅 → Yodobashi Umeda 5F → 駿河屋梅田茶屋町店 → 返回飯店。','📝 駿河屋為當日最後一站，沒有再去 animate 或 Mandarake。'],'45');
  patchCard(20,'難波行程完成：PARCO、法善寺、千日前與 CoCo壱番屋','心齋橋・難波 · 週一',['✓ 心齋橋 PARCO','✓ 法善寺・千日前','✓ CoCo壱番屋晚餐'],nambaStops,['✅ 7/20 實際路線：心齋橋 PARCO → 法善寺 → 難波千日前商店街 → CoCo壱番屋晚餐 → 返回 VESSEL INN NAMBA。','🍛 晚餐已確認為 CoCo壱番屋；因未確認分店名稱，網站以難波／千日前一帶記錄。'],'49');
  patchCard(21,'宇治與道頓堀行程完成：平等院、抹茶與美津の大阪燒','大阪・宇治・道頓堀 · 週二',['✓ 宇治平等院','✓ 中村藤吉抹茶','✓ 美津の大阪燒'],ujiStops,['✅ 7/21 實際路線：大阪高島屋 → 中書島轉乘 → 宇治平等院 → 中村藤吉抹茶 → 返回難波 → 道頓堀 → 美津の大阪燒。','🍵 中村藤吉的分店未確認；網站以宇治店家泛稱記錄。晚餐店名依官方名稱修正為「美津の（Mizuno）」。'],'52');
- patchCard(22,'最後一天：臨空城後到 EDION 完成最後採買','臨空城・大阪 · 週三',['✓ 臨空城','✓ EDION點數卡','✓ 瑪利歐商品'],rinkuStops,['✅ 7/22 已確認：臨空城 → EDION（愛電王）購買任天堂點數卡與瑪利歐商品。','📝 EDION分店與返回飯店時間尚未確認，因此不自行補填。'],'54');
+ patchCard(22,'最後採買完成：臨空城、EDION後返回飯店','臨空城・大阪 · 週三',['✓ 臨空城','✓ EDION點數卡','✓ 已返回飯店'],rinkuStops,['✅ 7/22 實際路線：臨空城 → EDION（愛電王）購買任天堂點數卡與瑪利歐商品 → 返回 VESSEL INN NAMBA。','🧳 回飯店後完成最後整理，準備隔日返台。'],'55');
+ patchCard(23,'已平安返回台灣，關西家庭旅行完成','大阪・關西機場・台灣 · 週四',['✓ 飯店退房','✓ 關西機場','✓ 已返回台灣'],returnStops,['✈️ 7/23 實際完成：VESSEL INN NAMBA 退房 → 關西國際機場 → 搭機返回台灣。','✅ 2026/7/15–7/23 關西家庭旅行全部完成。'],'55');
 }
 function start(){patch();setTimeout(patch,350);setTimeout(patch,1200);clearInterval(window.__itineraryFixTimer);window.__itineraryFixTimer=setInterval(patch,1500)}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start);else start();
